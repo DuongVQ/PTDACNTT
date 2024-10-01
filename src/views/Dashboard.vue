@@ -213,7 +213,7 @@
             @imageApproved="handleImageApproved"
         />
     </div>
-    <router-view></router-view>
+    <router-view></router-view>    
 </template>
 
 <script lang="ts" setup>
