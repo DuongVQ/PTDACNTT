@@ -81,7 +81,9 @@
 </template>
 
 <script>
+import { watch } from 'vue';
 export default {
+
     props: ['modalActive'],
     setup(props, { emit }) {
         const close = () => {

@@ -1,111 +1,207 @@
 <template>
     <div class="container-loginAdmin">
         <div class="wrapper">
-            <form @submit.prevent="handleLogin" ref="loginFormRef">
-                <h1>Đăng nhập Admin</h1>
+            <div class="left">
+                <img src="../images/poster.jpg" alt="" />
+            </div>
+            <div class="right">
+                <form @submit.prevent="handleLogin" ref="loginFormRef">
+                    <h1>Đăng nhập Admin</h1>
 
-                <div class="input-box">
-                    <input v-model="formLogin.account" type="text" placeholder="Nơi nhập email..." required />
-                </div>
+                    <div class="input-box">
+                        <div class="icon-form">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <input v-model="formLogin.account" type="text" placeholder="Nơi nhập email..." required />
+                    </div>
 
-                <div class="input-box">
-                    <input v-model="formLogin.password" type="password" placeholder="Nơi nhập password..." required />
-                </div>
+                    <div class="input-box">
+                        <div class="icon-form">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <input
+                            v-model="formLogin.password"
+                            type="password"
+                            placeholder="Nơi nhập password..."
+                            required
+                        />
+                    </div>
 
-                <RecaptchaV2
-                    @widget-id="handleWidgetId"
-                    @error-callback="handleErrorCalback"
-                    @expired-callback="handleExpiredCallback"
-                    @load-callback="handleLoadCallback"
-                />
+                    <RecaptchaV2
+                        @widget-id="handleWidgetId"
+                        @error-callback="handleErrorCalback"
+                        @expired-callback="handleExpiredCallback"
+                        @load-callback="handleLoadCallback"
+                    />
 
-                <div id="recaptcha-element"></div>
+                    <div id="recaptcha-element"></div>
 
-                <button type="submit" class="btn" :disabled="loading">
-                    Đăng nhập
-                    <div class="star-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25">
-                            <path
-                                fill="#fd1853"
-                                d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-      c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-      c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-      C475.116,213.899,475.116,136.489,427.313,88.686z"
-                            ></path>
-                        </svg>
-                    </div>
-                    <div class="star-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
-                            <path
-                                fill="#fd1853"
-                                d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-      c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-      c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-      C475.116,213.899,475.116,136.489,427.313,88.686z"
-                            ></path>
-                        </svg>
-                    </div>
-                    <div class="star-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="9" height="9">
-                            <path
-                                fill="#fd1853"
-                                d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-      c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-      c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-      C475.116,213.899,475.116,136.489,427.313,88.686z"
-                            ></path>
-                        </svg>
-                    </div>
-                    <div class="star-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="10" height="10">
-                            <path
-                                fill="#fd1853"
-                                d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-      c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-      c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-      C475.116,213.899,475.116,136.489,427.313,88.686z"
-                            ></path>
-                        </svg>
-                    </div>
-                    <div class="star-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
-                            <path
-                                fill="#fd1853"
-                                d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-      c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-      c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-      C475.116,213.899,475.116,136.489,427.313,88.686z"
-                            ></path>
-                        </svg>
-                    </div>
-                    <div class="star-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="7" height="7">
-                            <path
-                                fill="#fd1853"
-                                d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-      c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-      c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-      C475.116,213.899,475.116,136.489,427.313,88.686z"
-                            ></path>
-                        </svg>
-                    </div>
-                </button>
-                <div class="back-home">
-                    <p>
-                        <a href="/">Back to Home page</a>
-                    </p>
-                </div>
-            </form>
+                    <button type="submit" class="btn" :disabled="loading">
+                        Đăng nhập
+                        <div class="star-1">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="star-2">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="star-3">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="star-4">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="star-5">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="star-6">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
     <router-view></router-view>
 </template>
 
 <script setup>
+import { RecaptchaV2 } from 'vue3-recaptcha-v2';
 import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import '@fortawesome/fontawesome-free';
 import axios from 'axios';
-import { RecaptchaV2 } from 'vue3-recaptcha-v2';
 
 const handleWidgetId = (widgetId) => {
     console.log('Widget ID: ', widgetId);
@@ -127,7 +223,7 @@ const formLogin = reactive({
 });
 
 const loading = ref(false);
-const loginFormRef = ref<HTMLFormElement | null>(null);
+const loginFormRef = (ref < HTMLFormElement) | (null > null);
 
 // getItem local
 onMounted(() => {
@@ -144,7 +240,7 @@ const handleLogin = async () => {
         }
 
         // Check recaptchar
-        const recaptchaResponse = (document.getElementById('g-recaptcha-response'))?.value;
+        const recaptchaResponse = document.getElementById('g-recaptcha-response')?.value;
 
         if (!recaptchaResponse) {
             return;
@@ -204,6 +300,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/LoginAdmin.scss";
+@import '@/assets/LoginAdmin.scss';
 </style>
-

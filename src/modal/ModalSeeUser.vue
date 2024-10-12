@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <h3>
                     <i class="fa-regular fa-folder-open"></i> 
-                    Thông tin thành viên
+                    Thông tin nhân viên
                 </h3>
                 <button @click="closeModal">&times;</button>
             </div>
@@ -18,7 +18,7 @@
                             </div>
                         </p>
                         <p><strong>Tên:</strong> <span>{{ user.fullName }}</span></p>
-                        <p><strong>Facebook:</strong> <a :href="user.facebook" target="_blank">http://www.facebook.com/viper</a></p>
+                        <p><strong>Facebook:</strong> <a :href="user.facebook" target="_blank">http://www.facebook.com/employee</a></p>
                         <p><strong>Email:</strong> <span>{{ user.email }}</span></p>
                         <p><strong>Số điện thoại:</strong> <span>{{ user.phoneNumber }}</span></p>
                     </div>
@@ -76,10 +76,7 @@ const closeModal = () => {
                 margin-top: 20px;
                 margin-bottom: 0;
                 font-size: 23px;
-                background: linear-gradient(45deg, rgb(134, 128, 255), rgb(67, 224, 255));
-                background-clip: text;
-                -webkit-background-clip: text;
-                color: transparent;
+                color: #ff984f;
 
                 @media (max-width:767px) {
                     font-size: 18px;
@@ -96,7 +93,7 @@ const closeModal = () => {
                 background-color: transparent;
 
                 &:hover {
-                    color: rgb(0, 157, 255);
+                    color: #ff984f;
                 }
 
                 @media (max-width:767px) {
@@ -116,7 +113,7 @@ const closeModal = () => {
                 justify-content: center;
                 padding: 10px 0;
                 border-radius: 10px;
-                border: 2px solid rgb(0, 234, 255);
+                border: 2px solid #ff984f;
 
                 img {
                     width: 100%;
@@ -135,17 +132,20 @@ const closeModal = () => {
                     margin: 0;
                     margin-top: 13px;
                     strong {
-                        background: linear-gradient(45deg, rgb(134, 128, 255), rgb(67, 224, 255));
-                        background-clip: text;
-                        -webkit-background-clip: text;
-                        color: transparent;
+                        color: #ff984f;
                         margin-left: 5px;
                     }
                     span, a {
-                        border-bottom: 1px solid rgb(0, 208, 255);
+                        border-bottom: 1px solid #ff984f;
                         padding: 5px;
                         padding-top: 0;
                         text-decoration: none;
+                    }
+                    a {
+                        color: #222;
+                        &:hover {
+                            color: rgb(0, 208, 255);
+                        }
                     }
                 } 
             }

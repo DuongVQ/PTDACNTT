@@ -22,8 +22,8 @@ const router = createRouter({
             component: CheckinFace,
         },
         {
-            path: '/checkin-phone',
-            name: 'checkin-phone',
+            path: '/checkin-email',
+            name: 'checkin-email',
             component: CheckinEmail,
         },
         {

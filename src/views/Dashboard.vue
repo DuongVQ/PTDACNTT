@@ -7,7 +7,11 @@
                     <img src="../assets/Logo-HighLands-Coffee.webp" alt="" :class="{ hidden: isMenuHidden }" />
                     <h2 :class="{ hidden: isMenuHidden }">HILANDS COFFEE</h2>
                 </RouterLink>
-                <RouterLink to="/dashboard" class="btn-menu" :class="{ active: route.path === '/dashboard', hidden: isMenuHidden }">
+                <RouterLink
+                    to="/dashboard"
+                    class="btn-menu"
+                    :class="{ active: route.path === '/dashboard', hidden: isMenuHidden }"
+                >
                     <i class="fa-solid fa-house"></i>
                     <span>Trang chủ</span>
                 </RouterLink>
@@ -28,10 +32,9 @@
                     <span>Checkin Face</span>
                 </RouterLink>
                 <RouterLink
-                    to="/checkin-phone"
-                    class="btn-menu" 
-                    @click="navigateToCheckinEmail"
-                    :class="{ active: route.path === '/checkin-phone', hidden: isMenuHidden }"
+                    to="/checkin-email"
+                    class="btn-menu"
+                    :class="{ active: route.path === '/checkin-email', hidden: isMenuHidden }"
                 >
                     <i class="fa-solid fa-envelope"></i>
                     <span>Checkin Email</span>
@@ -47,13 +50,13 @@
         </div>
 
         <!-- Navbar -->
-         <div class="nav-bar"></div>
+        <div class="nav-bar"></div>
 
         <!-- Content -->
         <div class="content">
             <!-- Header content -->
             <div class="header-content">
-                <h3>Danh sách thành viên</h3>
+                <h3>Danh sách nhân viên</h3>
 
                 <!-- List btn controll -->
                 <div class="list-controll">
@@ -102,11 +105,11 @@
                     </label>
                     <label>
                         <input type="radio" name="display-mode" value="checked" v-model="filterMode" />
-                        Đã Checkin
+                        Đã Điểm danh
                     </label>
                     <label>
                         <input type="radio" name="display-mode" value="not-checked" v-model="filterMode" />
-                        Chưa Checkin
+                        Chưa Điểm danh
                     </label>
                 </form>
             </div>
@@ -180,13 +183,19 @@
                 </button>
 
                 <!-- choose page -->
+                <button @click="changePage(1)" :class="{ active: currentPage === 1 }">1</button>
+                <button v-if="currentPage > 3">...</button>
                 <button
-                    v-for="page in totalPages"
+                    v-for="page in pagesToShow"
                     :key="page"
                     @click="changePage(page)"
                     :class="{ active: currentPage === page }"
                 >
                     {{ page }}
+                </button>
+                <button v-if="currentPage < totalPages - 2">...</button>
+                <button @click="changePage(totalPages)" :class="{ active: currentPage === totalPages }">
+                    {{ totalPages }}
                 </button>
 
                 <!-- next page -->
@@ -213,7 +222,7 @@
             @imageApproved="handleImageApproved"
         />
     </div>
-    <router-view></router-view>    
+    <router-view></router-view>
 </template>
 
 <script lang="ts" setup>
@@ -236,13 +245,13 @@ const router = useRouter();
 const isMenuHidden = ref(false);
 
 const navigateToCheckinEmail = () => {
-  router.push('/checkin-phone');
+    router.push('/checkin-phone');
 };
 
 const logout = () => {
-  localStorage.removeItem('authToken');
+    localStorage.removeItem('authToken');
 
-  router.push('/');
+    router.push('/');
 };
 
 const toggleMenu = () => {
@@ -434,6 +443,20 @@ const filteredMembers = computed(() => {
 // Calculate total number of pages
 const totalPages = computed(() => {
     return Math.ceil(filteredMembers.value.length / itemsPerPage);
+});
+
+const pagesToShow = computed(() => {
+  if (totalPages.value <= 5) {
+    return Array.from({ length: totalPages.value }, (_, i) => i + 1);
+  } else {
+    if (currentPage.value <= 3) {
+      return [2, 3, 4];
+    } else if (currentPage.value >= totalPages.value - 2) {
+      return [totalPages.value - 3, totalPages.value - 2, totalPages.value - 1];
+    } else {
+      return [currentPage.value - 1, currentPage.value, currentPage.value + 1];
+    }
+  }
 });
 
 // Member number
