@@ -1,215 +1,218 @@
 <template>
-    <n-notification-provider>
-        <div class="modal-overlay" @click.self="closeModal">
-            <div class="modal-content" :class="{ 'animate-fade-in': isVisible, 'animate-fade-out': !isVisible }">
-                <div class="title">
-                    <h3>Thêm nhân viên mới</h3>
-                    <span @click="closeModal">&times;</span>
-                </div>
-                <form @submit.prevent="handleSubmit">
-                    <div class="form-group">
-                        <div class="icon_form-group">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-                        <input v-model="newUser.fullName" type="text" id="name" placeholder="Nhập tên nhân viên..." />
-                    </div>
-                    <div class="form-group">
-                        <div class="icon_form-group">
-                            <i class="fa-solid fa-people-roof"></i>
-                        </div>
-                        <input v-model="newUser.generation" type="number" id="generation" placeholder="Khóa đào tạo..." />
-                    </div>
-                    <div class="form-group">
-                        <div class="icon_form-group">
-                            <i class="fa-brands fa-facebook"></i>
-                        </div>
-                        <input
-                            v-model="newUser.facebook"
-                            type="text"
-                            id="facebook"
-                            placeholder="Nhập liên kết facebook..."
-                        />
-                    </div>
-                    <div class="form-group">
-                        <div class="icon_form-group">
-                            <i class="fa-solid fa-phone"></i>
-                        </div>
-                        <input
-                            v-model="newUser.phoneNumber"
-                            type="text"
-                            id="phone"
-                            placeholder="Nhập số điện thoại..."
-                        />
-                    </div>
-                    <div class="form-group">
-                        <div class="icon_form-group">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
-                        <input v-model="newUser.email" type="email" id="email" placeholder="Nhập email..." />
-                    </div>
-                    <div class="wrapper-btn">
-                        <button type="submit" class="btn-primary">
-                            Thêm
-                            <div class="star-1">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xml:space="preserve"
-                                    version="1.1"
-                                    style="
-                                        shape-rendering: geometricPrecision;
-                                        text-rendering: geometricPrecision;
-                                        image-rendering: optimizeQuality;
-                                        fill-rule: evenodd;
-                                        clip-rule: evenodd;
-                                    "
-                                    viewBox="0 0 784.11 815.53"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                >
-                                    <defs></defs>
-                                    <g id="Layer_x0020_1">
-                                        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                                        <path
-                                            class="fil0"
-                                            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                                        ></path>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div class="star-2">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xml:space="preserve"
-                                    version="1.1"
-                                    style="
-                                        shape-rendering: geometricPrecision;
-                                        text-rendering: geometricPrecision;
-                                        image-rendering: optimizeQuality;
-                                        fill-rule: evenodd;
-                                        clip-rule: evenodd;
-                                    "
-                                    viewBox="0 0 784.11 815.53"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                >
-                                    <defs></defs>
-                                    <g id="Layer_x0020_1">
-                                        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                                        <path
-                                            class="fil0"
-                                            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                                        ></path>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div class="star-3">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xml:space="preserve"
-                                    version="1.1"
-                                    style="
-                                        shape-rendering: geometricPrecision;
-                                        text-rendering: geometricPrecision;
-                                        image-rendering: optimizeQuality;
-                                        fill-rule: evenodd;
-                                        clip-rule: evenodd;
-                                    "
-                                    viewBox="0 0 784.11 815.53"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                >
-                                    <defs></defs>
-                                    <g id="Layer_x0020_1">
-                                        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                                        <path
-                                            class="fil0"
-                                            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                                        ></path>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div class="star-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xml:space="preserve"
-                                    version="1.1"
-                                    style="
-                                        shape-rendering: geometricPrecision;
-                                        text-rendering: geometricPrecision;
-                                        image-rendering: optimizeQuality;
-                                        fill-rule: evenodd;
-                                        clip-rule: evenodd;
-                                    "
-                                    viewBox="0 0 784.11 815.53"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                >
-                                    <defs></defs>
-                                    <g id="Layer_x0020_1">
-                                        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                                        <path
-                                            class="fil0"
-                                            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                                        ></path>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div class="star-5">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xml:space="preserve"
-                                    version="1.1"
-                                    style="
-                                        shape-rendering: geometricPrecision;
-                                        text-rendering: geometricPrecision;
-                                        image-rendering: optimizeQuality;
-                                        fill-rule: evenodd;
-                                        clip-rule: evenodd;
-                                    "
-                                    viewBox="0 0 784.11 815.53"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                >
-                                    <defs></defs>
-                                    <g id="Layer_x0020_1">
-                                        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                                        <path
-                                            class="fil0"
-                                            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                                        ></path>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div class="star-6">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xml:space="preserve"
-                                    version="1.1"
-                                    style="
-                                        shape-rendering: geometricPrecision;
-                                        text-rendering: geometricPrecision;
-                                        image-rendering: optimizeQuality;
-                                        fill-rule: evenodd;
-                                        clip-rule: evenodd;
-                                    "
-                                    viewBox="0 0 784.11 815.53"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                >
-                                    <defs></defs>
-                                    <g id="Layer_x0020_1">
-                                        <metadata id="CorelCorpID_0Corel-Layer"></metadata>
-                                        <path
-                                            class="fil0"
-                                            d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
-                                        ></path>
-                                    </g>
-                                </svg>
-                            </div>
-                        </button>
-                    </div>
-                </form>
+    <div class="modal-overlay" @click.self="closeModal">
+        <div class="modal-content" :class="{ 'animate-fade-in': isVisible, 'animate-fade-out': !isVisible }">
+            <div class="title">
+                <h3>Thêm nhân viên mới</h3>
+                <span @click="closeModal">&times;</span>
             </div>
+            <form @submit.prevent="handleSubmit">
+                <div class="form-group">
+                    <div class="icon_form-group">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <input v-model="newUser.fullName" type="text" id="name" placeholder="Nhập tên nhân viên..." />
+                </div>
+                <div class="form-group">
+                    <div class="icon_form-group">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <input
+                        v-model="newUser.generation"
+                        type="number"
+                        id="generation"
+                        placeholder="Năm sinh..."
+                    />
+                </div>
+                <div class="form-group">
+                    <div class="icon_form-group">
+                        <i class="fa-brands fa-facebook"></i>
+                    </div>
+                    <input
+                        v-model="newUser.facebook"
+                        type="text"
+                        id="facebook"
+                        placeholder="Nhập liên kết facebook..."
+                    />
+                </div>
+                <div class="form-group">
+                    <div class="icon_form-group">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <input
+                        v-model="newUser.phoneNumber"
+                        type="text"
+                        id="phone"
+                        placeholder="Nhập số điện thoại..."
+                    />
+                </div>
+                <div class="form-group">
+                    <div class="icon_form-group">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <input v-model="newUser.email" type="email" id="email" placeholder="Nhập email..." />
+                </div>
+                <div class="wrapper-btn">
+                    <button type="submit" class="btn-primary">
+                        Thêm
+                        <div class="star-1">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="star-2">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="star-3">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="star-4">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="star-5">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="star-6">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </form>
         </div>
-    </n-notification-provider>
+    </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, defineEmits, defineProps, defineComponent } from 'vue';
+import { ref, defineEmits, defineProps } from 'vue';
 import axios from 'axios';
 
 const newUser = ref({
@@ -389,7 +392,8 @@ const handleSubmit = async () => {
             text-align: center;
 
             button {
-                background: linear-gradient(45deg, rgb(255, 232, 156), rgb(255, 162, 0), rgb(255, 106, 0));
+                background: linear-gradient(45deg, #f9d255, rgb(255, 162, 0), rgb(255, 132, 43));
+                border: 3px solid #f68f46;
                 box-shadow: 6px 0px 0px #f69000;
                 position: relative;
                 padding: 8px 35px;
@@ -397,14 +401,13 @@ const handleSubmit = async () => {
                 font-size: 18px;
                 font-weight: 500;
                 color: white;
-                border: 3px solid #ffb47f;
                 border-radius: 8px;
                 box-shadow: 0 0 0 #fec1958c;
                 transition: all 0.3s ease-in-out;
                 margin-bottom: 30px;
                 cursor: pointer;
             }
-    
+
             .star-1 {
                 position: absolute;
                 top: 20%;
@@ -415,7 +418,7 @@ const handleSubmit = async () => {
                 z-index: -5;
                 transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
             }
-    
+
             .star-2 {
                 position: absolute;
                 top: 45%;
@@ -426,7 +429,7 @@ const handleSubmit = async () => {
                 z-index: -5;
                 transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
             }
-    
+
             .star-3 {
                 position: absolute;
                 top: 40%;
@@ -437,7 +440,7 @@ const handleSubmit = async () => {
                 z-index: -5;
                 transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
             }
-    
+
             .star-4 {
                 position: absolute;
                 top: 20%;
@@ -448,7 +451,7 @@ const handleSubmit = async () => {
                 z-index: -5;
                 transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
             }
-    
+
             .star-5 {
                 position: absolute;
                 top: 25%;
@@ -459,7 +462,7 @@ const handleSubmit = async () => {
                 z-index: -5;
                 transition: all 0.6s cubic-bezier(0, 0.4, 0, 1.01);
             }
-    
+
             .star-6 {
                 position: absolute;
                 top: 5%;
@@ -470,13 +473,13 @@ const handleSubmit = async () => {
                 z-index: -5;
                 transition: all 0.8s ease;
             }
-    
+
             button:hover {
                 background: transparent;
                 color: #fd9e18;
                 box-shadow: 0 0 50px #fd9e18;
             }
-    
+
             button:hover .star-1 {
                 position: absolute;
                 top: -80%;
@@ -486,7 +489,7 @@ const handleSubmit = async () => {
                 filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
-    
+
             button:hover .star-2 {
                 position: absolute;
                 top: -25%;
@@ -496,7 +499,7 @@ const handleSubmit = async () => {
                 filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
-    
+
             button:hover .star-3 {
                 position: absolute;
                 top: 55%;
@@ -506,7 +509,7 @@ const handleSubmit = async () => {
                 filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
-    
+
             button:hover .star-4 {
                 position: absolute;
                 top: 30%;
@@ -516,7 +519,7 @@ const handleSubmit = async () => {
                 filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
-    
+
             button:hover .star-5 {
                 position: absolute;
                 top: 25%;
@@ -526,7 +529,7 @@ const handleSubmit = async () => {
                 filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
-    
+
             button:hover .star-6 {
                 position: absolute;
                 top: 5%;
@@ -536,7 +539,7 @@ const handleSubmit = async () => {
                 filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
-    
+
             .fil0 {
                 fill: #fd7718;
             }

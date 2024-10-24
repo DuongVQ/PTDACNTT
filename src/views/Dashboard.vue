@@ -3,7 +3,7 @@
         <!-- Header -->
         <div class="header" :class="{ collapsed: isMenuHidden }">
             <div class="list-menu">
-                <RouterLink to="/" class="logo">
+                <RouterLink to="/dashboard" class="logo">
                     <img src="../assets/Logo-HighLands-Coffee.webp" alt="" :class="{ hidden: isMenuHidden }" />
                     <h2 :class="{ hidden: isMenuHidden }">HILANDS COFFEE</h2>
                 </RouterLink>
@@ -21,27 +21,27 @@
                     :class="{ active: route.path === '/checkin-qr', hidden: isMenuHidden }"
                 >
                     <i class="fa-solid fa-qrcode"></i>
-                    <span>Checkin QR</span>
+                    <span>Điểm danh bằng QR</span>
                 </RouterLink>
-                <RouterLink
+                <!-- <RouterLink
                     to="/checkin-face"
                     class="btn-menu"
                     :class="{ active: route.path === '/checkin-face', hidden: isMenuHidden }"
                 >
                     <i class="fa-solid fa-user-check"></i>
                     <span>Checkin Face</span>
-                </RouterLink>
+                </RouterLink> -->
                 <RouterLink
                     to="/checkin-email"
                     class="btn-menu"
                     :class="{ active: route.path === '/checkin-email', hidden: isMenuHidden }"
                 >
                     <i class="fa-solid fa-envelope"></i>
-                    <span>Checkin Email</span>
+                    <span>Điểm danh bằng Email</span>
                 </RouterLink>
                 <a href="/" @click="logout" class="btn-menu logout" :class="{ hidden: isMenuHidden }">
                     <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Logout</span>
+                    <span>Đăng xuất</span>
                 </a>
             </div>
             <div class="hidden-menu" @click="toggleMenu">
@@ -50,7 +50,40 @@
         </div>
 
         <!-- Navbar -->
-        <div class="nav-bar"></div>
+        <div class="nav-bar">
+            <div class="avata-admin">
+                <img src="../images/simple-user-default-icon-free-png.webp" alt="">
+                <div class="list-navbarMenu">
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 1
+                    </div>
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 2
+                    </div>
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 3
+                    </div>
+                    <div class="item-navbarMenu">
+                        <RouterLink
+                            to="/provide-qr"
+                            
+                        >
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            Cấp mã QR
+                        </RouterLink>
+                    </div>
+                    <div class="item-navbarMenu">
+                        <a href="/" @click="logout" class="btn-menu logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Đăng xuất
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Content -->
         <div class="content">
@@ -92,10 +125,10 @@
             <!-- Display mode -->
             <div class="display-mode">
                 <button class="add-member" @click="showModal = true">
-                    Thêm
                     <span>
                         <i class="fa-solid fa-plus"></i>
                     </span>
+                    Thêm
                     <router-view />
                 </button>
                 <form>
@@ -121,7 +154,7 @@
                     <tr>
                         <td class="headerTable-list_member">STT</td>
                         <td class="headerTable-list_member">Họ và tên</td>
-                        <td class="headerTable-list_member">Khóa</td>
+                        <td class="headerTable-list_member">Năm sinh</td>
                         <td class="headerTable-list_member">Email</td>
                         <td class="headerTable-list_member">Số điện thoại</td>
                         <td class="headerTable-list_member">Trạng thái</td>
@@ -163,13 +196,18 @@
                                 Update
                                 <router-view />
                             </button>
-                            <button v-if="member.image && !member.isAccessImage" @click="handleApproveImage(member)">
+                            <button @click="handleDeleteUser(member)">
+                                <i class="fa-solid fa-trash-can"></i>
+                                Xóa
+                                <router-view />
+                            </button>
+                            <!-- <button v-if="member.image && !member.isAccessImage" @click="handleApproveImage(member)">
                                 Duyệt ảnh
                                 <router-view />
                             </button>
                             <button v-if="member.image && !member.isAccessImage" @click="generateLink(member)">
                                 Tạo link
-                            </button>
+                            </button> -->
                         </td>
                     </tr>
                 </table>
@@ -214,29 +252,31 @@
             @close="showModalUpdateUser = false"
             @userUpdated="handleUserUpdated"
         />
-        <ModalApproveImage
+        <!-- <ModalApproveImage
             v-if="showModalApproveImage"
             :user="selectedUser"
             :token="token"
             @close="showModalApproveImage = false"
             @imageApproved="handleImageApproved"
-        />
+        /> -->
     </div>
     <router-view></router-view>
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
-import '@fortawesome/fontawesome-free/css/all.css';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
+import '@fortawesome/fontawesome-free/css/all.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
+import saveAs from 'file-saver';
 
 import ModalAddUser from '../modal/ModalAddUser.vue';
 import ModalSeeUser from '../modal/ModalSeeUser.vue';
 import ModalUpdateUser from '../modal/ModalUpdateUser.vue';
-import ModalApproveImage from '../modal/ModalApproveImage.vue';
+// import ModalApproveImage from '../modal/ModalApproveImage.vue';
 
 import { getToken } from '../api/authToken.js';
 
@@ -244,13 +284,8 @@ const route = useRoute();
 const router = useRouter();
 const isMenuHidden = ref(false);
 
-const navigateToCheckinEmail = () => {
-    router.push('/checkin-phone');
-};
-
 const logout = () => {
     localStorage.removeItem('authToken');
-
     router.push('/');
 };
 
@@ -284,7 +319,7 @@ const selectedUser = ref<Member | null>(null);
 const showModalUpdateUser = ref(false);
 
 // modal ApproveImage
-const showModalApproveImage = ref(false);
+// const showModalApproveImage = ref(false);
 
 // type of data
 interface Member {
@@ -355,10 +390,10 @@ const exportToExcel = () => {
             STT: count++,
             ID: member.id,
             'Họ và tên': member.fullName,
-            Khóa: member.generation,
+            'Năm sinh': member.generation,
             'Số điện thoại': member.phoneNumber,
             Email: member.email,
-            'Trạng thái': member.isCheckin ? 'Đã check-in' : 'Chưa check-in',
+            'Trạng thái': member.isCheckin ? 'Đã điểm danh' : 'Chưa điểm danh',
             'Ngày đăng ký': member.createdAt,
         })),
     );
@@ -401,6 +436,10 @@ const exportToExcel = () => {
     const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
     const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
     saveAs(blob, 'danh_sach_thanh_vien.xlsx');
+
+    toast.success('Đã xuất ra file Excel!', {
+        autoClose: 2000,
+    });
 };
 
 // Sort name function
@@ -420,9 +459,13 @@ const sortByName = () => {
 const reloadMembers = () => {
     fetchParticipants();
     currentPage.value = 1;
+
+    toast.success('Đã tải lại trang!', {
+        autoClose: 2000,
+    });
 };
 
-// Filter check-in
+// Filter checkin
 const filterByCheckStatus = computed(() => {
     if (filterMode.value === 'checked') {
         return members.value.filter((member) => member.isCheckin);
@@ -446,17 +489,17 @@ const totalPages = computed(() => {
 });
 
 const pagesToShow = computed(() => {
-  if (totalPages.value <= 5) {
-    return Array.from({ length: totalPages.value }, (_, i) => i + 1);
-  } else {
-    if (currentPage.value <= 3) {
-      return [2, 3, 4];
-    } else if (currentPage.value >= totalPages.value - 2) {
-      return [totalPages.value - 3, totalPages.value - 2, totalPages.value - 1];
+    if (totalPages.value <= 5) {
+        return Array.from({ length: totalPages.value }, (_, i) => i + 1);
     } else {
-      return [currentPage.value - 1, currentPage.value, currentPage.value + 1];
+        if (currentPage.value <= 3) {
+            return [2, 3, 4];
+        } else if (currentPage.value >= totalPages.value - 2) {
+            return [totalPages.value - 3, totalPages.value - 2, totalPages.value - 1];
+        } else {
+            return [currentPage.value - 1, currentPage.value, currentPage.value + 1];
+        }
     }
-  }
 });
 
 // Member number
@@ -486,6 +529,11 @@ const nextPage = () => {
 // add new user
 const handleUserAdded = (newUser: Member) => {
     members.value.push(newUser);
+
+    toast.success('Đã thêm nhân viên!', {
+        autoClose: 2000,
+    });
+
     fetchParticipants();
 };
 
@@ -507,44 +555,73 @@ const handleUserUpdated = (updatedUser: any) => {
     if (index !== -1) {
         members.value[index] = updatedUser;
     }
+    toast.success('Đã cập nhật thông tin!', {
+        autoClose: 2000,
+    });
     fetchParticipants();
 };
 
-// Browse photos
-const handleApproveImage = (user: Member) => {
-    selectedUser.value = user;
-    showModalApproveImage.value = true;
-};
+const handleDeleteUser = async (member: Member) => {
+    const confirmed = confirm(`Bạn có chắc chắn muốn xóa nhân viên ${member.fullName}?`);
+    if (!confirmed) return;
+    members.value = members.value.filter((m) => m.id !== member.id);
 
-// ImageApproved
-const handleImageApproved = (updatedUser: any) => {
-    const index = members.value.findIndex((member) => member.id === updatedUser.id);
-    if (index !== -1) {
-        members.value[index] = updatedUser;
-    }
-    fetchParticipants();
-};
-
-const generateLink = async (member: Member) => {
     try {
-        const response = await axios.get(`https://api.viphaui.com/api/v1/users/generate-link?q=${member.id}`, {
+        const response = await axios.delete(`https://api.viphaui.com/api/v1/users/${member.id}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
         });
 
-        const domain = window.location.origin;
-
-        const linkToken = response.data.data.token;
-        const link = `${domain}/UpdateImage?q=${linkToken}&id=${member.id}`;
-
-        // Copy link vào clipboard
-        await navigator.clipboard.writeText(link);
+        if (response.status === 500) {
+            alert('Xóa nhân viên thành công!');
+            // Cập nhật lại danh sách nhân viên sau khi xóa
+            members.value = members.value.filter((m) => m.id !== member.id);
+        } else {
+            alert('Xóa nhân viên thất bại!');
+        }
     } catch (error) {
-        console.error('Lỗi khi tạo link:', error);
+        console.error('Có lỗi xảy ra khi xóa nhân viên:', error);
+        alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
     }
 };
+
+// Browse photos
+// const handleApproveImage = (user: Member) => {
+//     selectedUser.value = user;
+//     showModalApproveImage.value = true;
+// };
+
+// ImageApproved
+// const handleImageApproved = (updatedUser: any) => {
+//     const index = members.value.findIndex((member) => member.id === updatedUser.id);
+//     if (index !== -1) {
+//         members.value[index] = updatedUser;
+//     }
+//     fetchParticipants();
+// };
+
+// const generateLink = async (member: Member) => {
+//     try {
+//         const response = await axios.get(`https://api.viphaui.com/api/v1/users/generate-link?q=${member.id}`, {
+//             headers: {
+//                 Authorization: `Bearer ${token}`,
+//                 'Content-Type': 'application/json',
+//             },
+//         });
+
+//         const domain = window.location.origin;
+
+//         const linkToken = response.data.data.token;
+//         const link = `${domain}/UpdateImage?q=${linkToken}&id=${member.id}`;
+
+//         // Copy link vào clipboard
+//         await navigator.clipboard.writeText(link);
+//     } catch (error) {
+//         console.error('Lỗi khi tạo link:', error);
+//     }
+// };
 
 // Name's page
 onMounted(() => {

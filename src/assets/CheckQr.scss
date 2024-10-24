@@ -14,7 +14,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background:  #eee;
+    background:  #DBDFE6;
 
     .header {
         display: flex;
@@ -130,6 +130,69 @@
         height: 70px;
         z-index: 9;
         background-color: #2f323e;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+
+        .avata-admin {
+            margin-right: 30px;
+            padding: 10px 0;
+            cursor: pointer;
+            position: relative;
+
+            .list-navbarMenu {
+                position: absolute;
+                width: 150px;
+                right: 0;
+                display: none;
+                padding: 5px 0;
+                border-radius: 5px;
+                box-shadow: 2px 2px 10px #00000057;
+                background-color: #fff;
+                overflow: hidden;
+
+                .item-navbarMenu {
+                    padding: 10px 0;
+                    padding-left: 10px;
+                    color: #212631;
+                    a {
+                    color: #212631;
+
+                    }
+                    i {
+                        width: 25px;
+                        height: 25px;
+                    }
+                    &:last-child {
+                        border-top: 1px solid #ccc;
+                    }
+
+                    &:hover {
+                        background-color: #e3e3e3;
+                    }
+                }
+            }
+
+            img {
+                background-color: #fff;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                object-fit: cover;
+                
+                &:hover {
+                    background-color: #cbced0;
+                }
+            }
+
+            &:hover {
+
+                .list-navbarMenu {
+                    display: block;
+                    z-index: 10;
+                }
+            }
+        }
     }
 
     .body-check {
@@ -140,7 +203,7 @@
         justify-content: center;
 
         h1 {
-            color: #fff;
+            color: #212631;
             font-size: 40px;
             margin-top: 20px;
 
@@ -156,7 +219,7 @@
             margin-top: 5px;
             object-fit: cover;
             border-radius: 10px;
-            border: 2px solid rgb(0, 170, 255);
+            border: 2px solid rgb(38, 38, 38);
             box-shadow: 0 0 10px #55555575;
 
             @media (max-width: 767px) {

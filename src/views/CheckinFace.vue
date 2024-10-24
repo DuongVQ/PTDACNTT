@@ -177,9 +177,9 @@ const router = useRouter();
 const isMenuHidden = ref(false);
 
 const logout = () => {
-  localStorage.removeItem('authToken');
+    localStorage.removeItem('authToken');
 
-  router.push('/');
+    router.push('/');
 };
 
 const toggleMenu = () => {

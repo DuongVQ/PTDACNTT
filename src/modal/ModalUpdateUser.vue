@@ -36,6 +36,12 @@
                         <input v-model="updatedUser.fullName" type="text" required />
                     </div>
 
+                    <!-- Generation -->
+                    <div class="form-group">
+                        <label>Năm sinh</label>
+                        <input v-model="updatedUser.generation" type="number" required />
+                    </div>
+
                     <!-- Email -->
                     <div class="form-group">
                         <label>Email</label>
@@ -48,18 +54,12 @@
                         <input v-model="updatedUser.phoneNumber" type="text" required />
                     </div>
 
-                    <!-- Generation -->
-                    <div class="form-group">
-                        <label>Khóa</label>
-                        <input v-model="updatedUser.generation" type="number" required />
-                    </div>
-
                     <!-- Status -->
                     <div class="form-group">
-                        <label>Trạng thái checkin</label>
+                        <label>Trạng thái</label>
                         <select v-model="updatedUser.isCheckin">
-                            <option :value="true">Đã Checkin</option>
-                            <option :value="false">Chưa Checkin</option>
+                            <option :value="true">Đã điểm danh</option>
+                            <option :value="false">Chưa điểm danh</option>
                         </select>
                     </div>
 
@@ -67,69 +67,153 @@
                     <button type="submit" class="btn-primary">
                         Lưu
                         <div class="star-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-    c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-    c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-    C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                         <div class="star-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-    c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-    c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-    C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                         <div class="star-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="9" height="9">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-    c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-    c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-    C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                         <div class="star-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="10" height="10">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-    c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-    c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-    C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                         <div class="star-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-    c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-    c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-    C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                         <div class="star-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="7" height="7">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-    c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-    c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-    C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                     </button>
@@ -140,7 +224,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits, defineComponent } from 'vue';
+import { ref, defineProps, defineEmits } from 'vue';
 import axios from 'axios';
 
 const props = defineProps<{ user: any; token: string }>();
@@ -225,7 +309,7 @@ const handleSubmit = async () => {
                 font-size: 23px;
                 margin: 0;
                 margin-top: 22px;
-                background: linear-gradient(45deg, rgb(134, 128, 255), rgb(67, 224, 255));
+                background: linear-gradient(45deg, rgb(255, 177, 89), rgb(255, 155, 67));
                 background-clip: text;
                 -webkit-background-clip: text;
                 color: transparent;
@@ -242,7 +326,7 @@ const handleSubmit = async () => {
                 font-size: 35px;
                 cursor: pointer;
                 &:hover {
-                    color: #007bff;
+                    color: #ff6f56;
                 }
                 @media (max-width: 767px) {
                     top: 15px;
@@ -273,7 +357,7 @@ const handleSubmit = async () => {
                 label {
                     font-size: 18px;
                     font-weight: 600;
-                    background: linear-gradient(45deg, rgb(134, 128, 255), rgb(67, 224, 255));
+                    background: linear-gradient(45deg, rgb(255, 177, 89), rgb(255, 155, 67));
                     background-clip: text;
                     -webkit-background-clip: text;
                     color: transparent;
@@ -283,7 +367,7 @@ const handleSubmit = async () => {
                     padding: 5px 10px;
                     border: none;
                     outline: none;
-                    border-bottom: 1px solid rgb(0, 213, 255);
+                    border-bottom: 1px solid #ff9a56;
                     font-size: 18px;
                     color: #444;
                 }
@@ -292,18 +376,20 @@ const handleSubmit = async () => {
             // Btn
             /* From Uiverse.io by Peary74 */
             button {
-                background: linear-gradient(45deg, rgb(156, 174, 255), rgb(0, 179, 255), rgb(0, 204, 255));
-                box-shadow: 6px 0px 0px #00c1f6;
+                background: linear-gradient(45deg, #f9d255, rgb(255, 162, 0), rgb(255, 132, 43));
+                border: 3px solid #f68f46;
+                box-shadow: 6px 0px 0px #f69000;
                 position: relative;
-                padding: 10px 35px;
+                padding: 8px 35px;
+                margin-top: 20px;
                 font-size: 18px;
                 font-weight: 500;
                 color: white;
-                border: 3px solid #00cdf6;
                 border-radius: 8px;
                 box-shadow: 0 0 0 #fec1958c;
                 transition: all 0.3s ease-in-out;
                 margin-bottom: 30px;
+                cursor: pointer;
             }
 
             .star-1 {
@@ -312,7 +398,7 @@ const handleSubmit = async () => {
                 left: 20%;
                 width: 25px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd1853);
+                filter: drop-shadow(0 0 0 #fd7718);
                 z-index: -5;
                 transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
             }
@@ -323,7 +409,7 @@ const handleSubmit = async () => {
                 left: 45%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd1853);
+                filter: drop-shadow(0 0 0 #fd7718);
                 z-index: -5;
                 transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -334,7 +420,7 @@ const handleSubmit = async () => {
                 left: 40%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd1853);
+                filter: drop-shadow(0 0 0 #fd7718);
                 z-index: -5;
                 transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -345,7 +431,7 @@ const handleSubmit = async () => {
                 left: 40%;
                 width: 8px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd1853);
+                filter: drop-shadow(0 0 0 #fd7718);
                 z-index: -5;
                 transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -356,7 +442,7 @@ const handleSubmit = async () => {
                 left: 45%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd1853);
+                filter: drop-shadow(0 0 0 #fd7718);
                 z-index: -5;
                 transition: all 0.6s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -367,18 +453,15 @@ const handleSubmit = async () => {
                 left: 50%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd1853);
+                filter: drop-shadow(0 0 0 #fd7718);
                 z-index: -5;
                 transition: all 0.8s ease;
             }
 
             button:hover {
                 background: transparent;
-                background: linear-gradient(45deg, rgb(134, 128, 255), rgb(67, 224, 255));
-                background-clip: text;
-                -webkit-background-clip: text;
-                color: transparent;
-                box-shadow: 0 0 50px #18b8fd;
+                color: #fd9e18;
+                box-shadow: 0 0 50px #fd9e18;
             }
 
             button:hover .star-1 {
@@ -387,7 +470,7 @@ const handleSubmit = async () => {
                 left: -30%;
                 width: 25px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd1853);
+                filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
 
@@ -397,7 +480,7 @@ const handleSubmit = async () => {
                 left: 10%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd1853);
+                filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
 
@@ -407,7 +490,7 @@ const handleSubmit = async () => {
                 left: 25%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd1853);
+                filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
 
@@ -417,7 +500,7 @@ const handleSubmit = async () => {
                 left: 80%;
                 width: 8px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd1853);
+                filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
 
@@ -427,7 +510,7 @@ const handleSubmit = async () => {
                 left: 115%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd1853);
+                filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
 
@@ -437,12 +520,12 @@ const handleSubmit = async () => {
                 left: 60%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd1853);
+                filter: drop-shadow(0 0 10px #fd7718);
                 z-index: 2;
             }
 
             .fil0 {
-                fill: #fd1853;
+                fill: #fd7718;
             }
         }
 
@@ -468,7 +551,7 @@ const handleSubmit = async () => {
     align-items: center;
     justify-content: flex-end;
     padding: 10px;
-    background: linear-gradient(45deg, #938aff, #7ae4ff);
+    background: #3bd4ff;
     border-radius: 15px;
     box-shadow: 0 15px 30px rgba(58, 58, 58, 0.2);
     width: 185px;

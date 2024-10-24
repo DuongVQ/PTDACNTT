@@ -4,6 +4,7 @@
             <div class="left">
                 <img src="../images/poster.jpg" alt="" />
             </div>
+
             <div class="right">
                 <form @submit.prevent="handleLogin" ref="loginFormRef">
                     <h1>Đăng nhập Admin</h1>
@@ -200,6 +201,8 @@
 import { RecaptchaV2 } from 'vue3-recaptcha-v2';
 import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import '@fortawesome/fontawesome-free';
 import axios from 'axios';
 
@@ -227,6 +230,10 @@ const loginFormRef = (ref < HTMLFormElement) | (null > null);
 
 // getItem local
 onMounted(() => {
+    toast.success('Đăng xuất thành công!', {
+        autoClose: 2000,
+    });
+    
     const token = localStorage.getItem('authToken');
     if (token) {
     }
@@ -236,6 +243,9 @@ const handleLogin = async () => {
     try {
         // Check null account-password
         if (!formLogin.account || !formLogin.password) {
+            toast.error('Vui lòng nhập email hoặc số điện thoại!', {
+                autoClose: 3000,
+            });
             return;
         }
 
@@ -243,6 +253,9 @@ const handleLogin = async () => {
         const recaptchaResponse = document.getElementById('g-recaptcha-response')?.value;
 
         if (!recaptchaResponse) {
+            toast.error('Vui lòng xác nhận reCAPTCHA!', {
+                autoClose: 3000,
+            });
             return;
         }
 
@@ -263,15 +276,25 @@ const handleLogin = async () => {
         );
 
         if (response.data.message === 'login success') {
-            localStorage.setItem('user', JSON.stringify(response.data));
-            // setItem
-            localStorage.setItem('authToken', response.data.token);
+            toast.success('Đăng nhập thành công!', {
+                autoClose: 2000,
+            });
 
-            router.replace('/dashboard');
+            setTimeout(() => {
+                localStorage.setItem('user', JSON.stringify(response.data));
+                localStorage.setItem('authToken', response.data.token);
+                router.replace('/dashboard');
+            }, 2000);
         } else {
+            toast.error('Đăng nhập thất bại, vui lòng kiểm tra thông tin!', {
+                autoClose: 3000,
+            });
             return;
         }
     } catch (error) {
+        toast.error(error.response?.data?.message || 'Đã xảy ra lỗi', {
+            autoClose: 3000,
+        });
     } finally {
         loading.value = false;
     }

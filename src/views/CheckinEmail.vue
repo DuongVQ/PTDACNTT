@@ -3,7 +3,7 @@
         <!-- Header -->
         <div class="header" :class="{ collapsed: isMenuHidden }">
             <div class="list-menu">
-                <RouterLink to="/" class="logo">
+                <RouterLink to="/dashboard" class="logo">
                     <img src="../assets/Logo-HighLands-Coffee.webp" alt="" :class="{ hidden: isMenuHidden }" />
                     <h2 :class="{ hidden: isMenuHidden }">HILANDS COFFEE</h2>
                 </RouterLink>
@@ -21,27 +21,27 @@
                     :class="{ active: route.path === '/checkin-qr', hidden: isMenuHidden }"
                 >
                     <i class="fa-solid fa-qrcode"></i>
-                    <span>Checkin QR</span>
+                    <span>Điểm danh bằng QR</span>
                 </RouterLink>
-                <RouterLink
+                <!-- <RouterLink
                     to="/checkin-face"
                     class="btn-menu"
                     :class="{ active: route.path === '/checkin-face', hidden: isMenuHidden }"
                 >
                     <i class="fa-solid fa-user-check"></i>
                     <span>Checkin Face</span>
-                </RouterLink>
+                </RouterLink> -->
                 <RouterLink
-                    to="/checkin-phone"
+                    to="/checkin-email"
                     class="btn-menu"
-                    :class="{ active: route.path === '/checkin-phone', hidden: isMenuHidden }"
+                    :class="{ active: route.path === '/checkin-email', hidden: isMenuHidden }"
                 >
                     <i class="fa-solid fa-envelope"></i>
-                    <span>Checkin Email</span>
+                    <span>Điểm danh bằng Email</span>
                 </RouterLink>
                 <a href="/" @click="logout" class="btn-menu logout" :class="{ hidden: isMenuHidden }">
                     <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Logout</span>
+                    <span>Đăng xuất</span>
                 </a>
             </div>
             <div class="hidden-menu" @click="toggleMenu">
@@ -50,85 +50,202 @@
         </div>
 
         <!-- Navbar -->
-        <div class="nav-bar"></div>
+        <div class="nav-bar">
+            <div class="avata-admin">
+                <img src="../images/simple-user-default-icon-free-png.webp" alt="">
+                <div class="list-navbarMenu">
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 1
+                    </div>
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 2
+                    </div>
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 3
+                    </div>
+                    <div class="item-navbarMenu">
+                        <RouterLink
+                            to="/provide-qr"
+                            
+                        >
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            Cấp mã QR
+                        </RouterLink>
+                    </div>
+                    <div class="item-navbarMenu">
+                        <a href="/" @click="logout" class="btn-menu logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Đăng xuất
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Body -->
         <div class="wrapper-checkinform">
             <div class="check-in-form">
-                <h1>Check-in phone-email</h1>
+                <h1>Điểm danh bằng Email</h1>
                 <form @submit.prevent="checkIn">
                     <div class="form-group">
                         <label for="email">Nhập email hoặc số điện thoại*</label>
                         <input v-model="inputValue" type="text" id="email" placeholder="nguyenvana@gmail.com" />
                     </div>
-    
+
                     <!-- Btn check -->
                     <button type="submit" @click="handleCheck" class="submit-btn">
-                        Check-in
+                        Điểm danh
                         <div class="star-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="25" height="25">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-          c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-          c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-          C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                         <div class="star-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-          c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-          c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-          C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                         <div class="star-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="9" height="9">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-          c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-          c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-          C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                         <div class="star-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="10" height="10">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-          c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-          c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-          C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                         <div class="star-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-          c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-          c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-          C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                         <div class="star-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="7" height="7">
-                                <path
-                                    fill="#fd1853"
-                                    d="M427.313,88.686c-47.803-47.803-125.213-47.803-173.016,0l-17.087,17.087l-17.087-17.087
-          c-47.803-47.803-125.213-47.803-173.016,0c-47.803,47.803-47.803,125.213,0,173.016l190.103,190.103
-          c4.88,4.88,11.316,7.322,17.752,7.322c6.435,0,13.871-2.442,18.751-7.322l190.103-190.103
-          C475.116,213.899,475.116,136.489,427.313,88.686z"
-                                ></path>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xml:space="preserve"
+                                version="1.1"
+                                style="
+                                    shape-rendering: geometricPrecision;
+                                    text-rendering: geometricPrecision;
+                                    image-rendering: optimizeQuality;
+                                    fill-rule: evenodd;
+                                    clip-rule: evenodd;
+                                "
+                                viewBox="0 0 784.11 815.53"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                            >
+                                <defs></defs>
+                                <g id="Layer_x0020_1">
+                                    <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                                    <path
+                                        class="fil0"
+                                        d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                    ></path>
+                                </g>
                             </svg>
                         </div>
                     </button>
@@ -139,11 +256,13 @@
         <!-- Modal thanks for joined -->
         <Modal @close="handleCheck" :modalActive="modalActive">
             <div class="modal-content">
-                <h1>Cảm ơn đã tham gia!</h1>
+                <h1>Thông báo điểm danh!</h1>
+                <!-- <img src="../images/checksecondary61.gif" alt=""> -->
+                <img src="../images/Animation - 1729764222906.gif" alt="">
                 <p>
-                    Cảm ơn anh/chị
-                    <span class="participant"> {{ fullName }} - Khóa: {{ course }} </span>
-                    đã tham dự bữa tiệc sinh nhật của V.I.P English Club
+                    Cảm ơn bạn
+                    <span class="participant"> {{ fullName }} </span> <br>
+                    Đã đến đúng giờ đi làm!
                 </p>
             </div>
         </Modal>
@@ -155,11 +274,8 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
-// yarn add @font...
 import '@fortawesome/fontawesome-free/css/all.css';
-
 import Modal from '../modal/ModalCheckEmail.vue';
-
 import { getToken } from '../api/authToken.js';
 
 const inputValue = ref('');
@@ -171,9 +287,9 @@ const router = useRouter();
 const isMenuHidden = ref(false);
 
 const logout = () => {
-  localStorage.removeItem('authToken');
+    localStorage.removeItem('authToken');
 
-  router.push('/');
+    router.push('/');
 };
 
 const toggleMenu = () => {
@@ -238,7 +354,7 @@ const handleCheck = () => {
 
 // Name's page
 onMounted(() => {
-    document.title = 'Checkin email và số điện thoại';
+    document.title = 'Checkin email hoặc số điện thoại';
 });
 </script>
 

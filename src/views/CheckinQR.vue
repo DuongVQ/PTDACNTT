@@ -3,7 +3,7 @@
         <!-- Header -->
         <div class="header" :class="{ collapsed: isMenuHidden }">
             <div class="list-menu">
-                <RouterLink to="/" class="logo">
+                <RouterLink to="/dashboard" class="logo">
                     <img src="../assets/Logo-HighLands-Coffee.webp" alt="" :class="{ hidden: isMenuHidden }" />
                     <h2 :class="{ hidden: isMenuHidden }">HILANDS COFFEE</h2>
                 </RouterLink>
@@ -21,27 +21,27 @@
                     :class="{ active: route.path === '/checkin-qr', hidden: isMenuHidden }"
                 >
                     <i class="fa-solid fa-qrcode"></i>
-                    <span>Checkin QR</span>
+                    <span>Điểm danh bằng QR</span>
                 </RouterLink>
-                <RouterLink
+                <!-- <RouterLink
                     to="/checkin-face"
                     class="btn-menu"
                     :class="{ active: route.path === '/checkin-face', hidden: isMenuHidden }"
                 >
                     <i class="fa-solid fa-user-check"></i>
                     <span>Checkin Face</span>
-                </RouterLink>
+                </RouterLink> -->
                 <RouterLink
                     to="/checkin-email"
                     class="btn-menu"
                     :class="{ active: route.path === '/checkin-email', hidden: isMenuHidden }"
                 >
                     <i class="fa-solid fa-envelope"></i>
-                    <span>Checkin Email</span>
+                    <span>Điểm danh bằng Email</span>
                 </RouterLink>
                 <a href="/" @click="logout" class="btn-menu logout" :class="{ hidden: isMenuHidden }">
                     <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Logout</span>
+                    <span>Đăng xuất</span>
                 </a>
             </div>
             <div class="hidden-menu" @click="toggleMenu">
@@ -50,7 +50,40 @@
         </div>
 
         <!-- Navbar -->
-        <div class="nav-bar"></div>
+        <div class="nav-bar">
+            <div class="avata-admin">
+                <img src="../images/simple-user-default-icon-free-png.webp" alt="">
+                <div class="list-navbarMenu">
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 1
+                    </div>
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 2
+                    </div>
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 3
+                    </div>
+                    <div class="item-navbarMenu">
+                        <RouterLink
+                            to="/provide-qr"
+                            
+                        >
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            Cấp mã QR
+                        </RouterLink>
+                    </div>
+                    <div class="item-navbarMenu">
+                        <a href="/" @click="logout" class="btn-menu logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Đăng xuất
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Body check face -->
         <div class="body-check">
@@ -73,20 +106,20 @@
             <div v-if="showModal" class="modal">
                 <div class="modal-content">
                     <div class="title">
-                        <h2>Cảm ơn đã tham gia!</h2>
+                        <h2>Thông báo điểm danh</h2>
                         <span class="close" @click="closeModal">&times;</span>
                     </div>
                     <p>
-                        Cảm ơn anh/chị
+                        Cảm ơn bạn 
                         <span>
                             {{ fullName }}
                         </span>
-                        - Khóa:
+                        <!-- - Năm:
                         <span>
                             {{ generation }}
-                        </span>
+                        </span> -->
                         <br />
-                        Đã tham gia buổi tiệc sinh nhật của V.I.P English Club
+                        Đã đến đúng giờ đi làm!
                     </p>
                     <button class="close-btn" @click="closeModal">
                         Thank you
@@ -188,9 +221,9 @@ const router = useRouter();
 const isMenuHidden = ref(false);
 
 const logout = () => {
-  localStorage.removeItem('authToken');
+    localStorage.removeItem('authToken');
 
-  router.push('/');
+    router.push('/');
 };
 
 const toggleMenu = () => {

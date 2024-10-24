@@ -129,8 +129,9 @@ const closeModal = () => {
                 p {
                     display: flex;
                     flex-direction: column;
-                    margin: 0;
-                    margin-top: 13px;
+                    margin-bottom: 15px;
+                    margin-top: 20px;
+
                     strong {
                         color: #ff984f;
                         margin-left: 5px;
@@ -144,7 +145,7 @@ const closeModal = () => {
                     a {
                         color: #222;
                         &:hover {
-                            color: rgb(0, 208, 255);
+                            color: rgb(0, 98, 255);
                         }
                     }
                 } 
