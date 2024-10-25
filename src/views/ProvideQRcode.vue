@@ -1,5 +1,86 @@
 <template>
     <div class="wrapper">
+        <!-- Header -->
+        <div class="header" :class="{ collapsed: isMenuHidden }">
+            <div class="list-menu">
+                <RouterLink to="/dashboard" class="logo">
+                    <img src="../assets/Logo-HighLands-Coffee.webp" alt="" :class="{ hidden: isMenuHidden }" />
+                    <h2 :class="{ hidden: isMenuHidden }">HILANDS COFFEE</h2>
+                </RouterLink>
+                <RouterLink
+                    to="/dashboard"
+                    class="btn-menu"
+                    :class="{ active: route.path === '/dashboard', hidden: isMenuHidden }"
+                >
+                    <i class="fa-solid fa-house"></i>
+                    <span>Trang chủ</span>
+                </RouterLink>
+                <RouterLink
+                    to="/checkin-qr"
+                    class="btn-menu"
+                    :class="{ active: route.path === '/checkin-qr', hidden: isMenuHidden }"
+                >
+                    <i class="fa-solid fa-qrcode"></i>
+                    <span>Điểm danh bằng QR</span>
+                </RouterLink>
+                <!-- <RouterLink
+                    to="/checkin-face"
+                    class="btn-menu"
+                    :class="{ active: route.path === '/checkin-face', hidden: isMenuHidden }"
+                >
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>Checkin Face</span>
+                </RouterLink> -->
+                <RouterLink
+                    to="/checkin-email"
+                    class="btn-menu"
+                    :class="{ active: route.path === '/checkin-email', hidden: isMenuHidden }"
+                >
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Điểm danh bằng Email</span>
+                </RouterLink>
+                <a href="/" @click="logout" class="btn-menu logout" :class="{ hidden: isMenuHidden }">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </div>
+            <div class="hidden-menu" @click="toggleMenu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+
+        <!-- Navbar -->
+        <div class="nav-bar">
+            <div class="avata-admin">
+                <img src="../images/simple-user-default-icon-free-png.webp" alt="" />
+                <div class="list-navbarMenu">
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 1
+                    </div>
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 2
+                    </div>
+                    <div class="item-navbarMenu">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Chức năng 3
+                    </div>
+                    <div class="item-navbarMenu">
+                        <RouterLink to="/provide-qr">
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            Cấp mã QR
+                        </RouterLink>
+                    </div>
+                    <div class="item-navbarMenu">
+                        <a href="/" @click="logout" class="btn-menu logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Đăng xuất
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Right -->
         <div class="check-in-form">
             <h1>Cấp mã QR</h1>
@@ -181,7 +262,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
 // yarn add vue3-toastify
 import 'vue3-toastify/dist/index.css';
@@ -211,6 +293,34 @@ const inputValue = ref('');
 const qrCode = ref<string | null>(null);
 const modalActive = ref(false);
 
+const route = useRoute();
+const router = useRouter();
+const isMenuHidden = ref(false);
+const logout = () => {
+    localStorage.removeItem('authToken');
+    router.push('/');
+};
+
+const toggleMenu = () => {
+    isMenuHidden.value = !isMenuHidden.value;
+    if (isMenuHidden.value) {
+        document.body.style.paddingLeft = '70px';
+    } else {
+        document.body.style.paddingLeft = '280px';
+    }
+};
+
+onMounted(() => {
+    document.body.style.transition = 'padding-left 0.3s ease';
+    document.body.style.paddingLeft = isMenuHidden.value ? '70px' : '280px';
+});
+
+onBeforeUnmount(() => {
+    document.body.style.paddingLeft = '0';
+    document.body.style.transition = '';
+});
+
+
 // Handle checkin
 const checkIn = async () => {
     try {
@@ -224,17 +334,15 @@ const checkIn = async () => {
             return;
         }
 
-        const response = await axios.get(`https://api.viphaui.com/api/v1/users/renew-qr?q=${inputValue.value}`, 
-            {
-                headers: {
-                    recaptcha: recaptchaResponse,
-                },
+        const response = await axios.get(`https://api.viphaui.com/api/v1/users/renew-qr?q=${inputValue.value}`, {
+            headers: {
+                recaptcha: recaptchaResponse,
             },
-        );
+        });
 
         // Check valid ID
         if (response.data.data.id) {
-            modalActive.value = true
+            modalActive.value = true;
             qrCode.value = await QRCode.toDataURL(response.data.data.id);
         }
     } catch (error) {
@@ -259,8 +367,8 @@ const handleCheck = () => {
         });
         return;
     }
-    if(modalActive.value) {
-        modalActive.value = false
+    if (modalActive.value) {
+        modalActive.value = false;
     }
 };
 

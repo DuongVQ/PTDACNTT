@@ -574,7 +574,7 @@ const handleDeleteUser = async (member: Member) => {
             },
         });
 
-        if (response.status === 500) {
+        if (response.status === 200) {
             alert('Xóa nhân viên thành công!');
             // Cập nhật lại danh sách nhân viên sau khi xóa
             members.value = members.value.filter((m) => m.id !== member.id);

@@ -197,7 +197,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { QrcodeStream } from 'vue-qrcode-reader';
 import { useRoute, useRouter } from 'vue-router';
 // yarn add @font...
@@ -234,6 +234,17 @@ const toggleMenu = () => {
         document.body.style.paddingLeft = '280px';
     }
 };
+
+onMounted(() => {
+    document.body.style.transition = 'padding-left 0.3s ease';
+    document.body.style.paddingLeft = isMenuHidden.value ? '70px' : '280px';
+});
+
+onBeforeUnmount(() => {
+    document.body.style.paddingLeft = '0';
+    document.body.style.transition = '';
+});
+
 
 const closeModal = () => {
     showModal.value = false;
