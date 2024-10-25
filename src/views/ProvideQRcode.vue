@@ -265,13 +265,12 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
-// yarn add vue3-toastify
 import 'vue3-toastify/dist/index.css';
 import { toast } from 'vue3-toastify';
 import QRCode from 'qrcode';
 import Modal from '../modal/ModalProvideQRcode.vue';
 
-// =====================yarn add vue-recaptcha=====================
+// =====================npm i vue-recaptcha=====================
 import { RecaptchaV2 } from 'vue3-recaptcha-v2';
 
 const handleWidgetId = (widgetId: number) => {
@@ -319,7 +318,6 @@ onBeforeUnmount(() => {
     document.body.style.paddingLeft = '0';
     document.body.style.transition = '';
 });
-
 
 // Handle checkin
 const checkIn = async () => {
