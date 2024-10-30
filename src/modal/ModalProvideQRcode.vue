@@ -56,6 +56,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 10;
     background-color: #6d6d6d1c;
     .modal-inner {
         position: relative;
