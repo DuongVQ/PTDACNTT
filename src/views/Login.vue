@@ -206,6 +206,7 @@ import 'vue3-toastify/dist/index.css';
 import '@fortawesome/fontawesome-free';
 import axios from 'axios';
 
+// Setup recaptcha
 const handleWidgetId = (widgetId) => {
     console.log('Widget ID: ', widgetId);
 };
@@ -218,6 +219,7 @@ const handleExpiredCallback = () => {
 const handleLoadCallback = (response) => {
     console.log('Load callback', response);
 };
+// End setup
 
 const router = useRouter();
 const formLogin = reactive({
@@ -233,7 +235,7 @@ onMounted(() => {
     toast.success('Đăng xuất thành công!', {
         autoClose: 2000,
     });
-    
+
     const token = localStorage.getItem('authToken');
     if (token) {
     }

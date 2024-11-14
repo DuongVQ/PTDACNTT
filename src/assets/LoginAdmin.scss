@@ -13,7 +13,8 @@
     align-items: center;
     justify-content: center;
     font-family: sans-serif;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/thiet-ke-quan-highlands-coffee-1.jpg') no-repeat center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('../images/thiet-ke-quan-highlands-coffee-1.jpg') no-repeat center/cover;
 
     .wrapper {
         width: 600px;
@@ -65,7 +66,7 @@
                 border: 2px solid #f19e61;
                 border-radius: 5px;
                 overflow: hidden;
-                
+
                 .icon-form {
                     color: #f19e61;
                     width: 60px;

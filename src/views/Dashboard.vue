@@ -63,8 +63,13 @@
                         Chức năng 2
                     </div>
                     <div class="item-navbarMenu">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        Chức năng 3
+                        <RouterLink
+                            to="/signup"
+                            
+                        >
+                            <i class="fa-solid fa-user-plus"></i>
+                            Link đăng ký
+                        </RouterLink>
                     </div>
                     <div class="item-navbarMenu">
                         <RouterLink
@@ -85,161 +90,190 @@
             </div>
         </div>
 
-        <!-- Content -->
-        <div class="content">
-            <!-- Header content -->
-            <div class="header-content">
-                <h3>Danh sách nhân viên</h3>
-
-                <!-- List btn controll -->
-                <div class="list-controll">
-                    <!-- Btn reload -->
-                    <button class="reload-content" @click="reloadMembers">
-                        <span class="tooltip-text">Tải lại</span>
-                        <i class="fa-solid fa-rotate-right"></i>
-                    </button>
-
-                    <!-- Btn sort name -->
-                    <button class="sort" @click="sortByName">
-                        <span class="tooltip-text">Sắp xếp</span>
-                        <i class="fa-solid fa-arrow-down-a-z"></i>
-                    </button>
-
-                    <!-- Export to Excel -->
-                    <button class="excel" @click="exportToExcel">
-                        <span class="tooltip-text">Xuất Excel</span>
-                        <i class="fa-solid fa-file-export"></i>
-                    </button>
-
-                    <!-- Search box -->
-                    <div class="search">
-                        <input type="text" name="" id="" placeholder="Search..." v-model="searchQuery" />
-                        <button class="btn-search">
-                            <span class="tooltip-text">Search</span>
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </div>
+        <div class="main">
+            <div class="detail">
+                <div class="item-detail"
+                    style="border-left: 4px solid rgb(34, 188, 34);"
+                >
+                    Số lượng nhân viên đã điểm danh <br>
+                    <span>
+                        {{ checkedInCount }} / {{ members.length }}
+                    </span>
+                </div>
+                <div class="item-detail"
+                    style="border-left: 4px solid rgb(236, 32, 32);"
+                >
+                    Số lượng nhân viên chưa điểm danh <br> 
+                    <span>
+                        {{ notCheckedInCount }}
+                    </span>
+                </div>
+                <div class="item-detail"
+                    style="border-left: 4px solid #666;"
+                    @click="openLateUsersModal"
+                >
+                    Số lượng nhân viên đến muộn <br>
+                    <span>
+                        {{ lateCheckInCount }}
+                    </span>
                 </div>
             </div>
-
-            <!-- Display mode -->
-            <div class="display-mode">
-                <button class="add-member" @click="showModal = true">
-                    <span>
-                        <i class="fa-solid fa-plus"></i>
-                    </span>
-                    Thêm
-                    <router-view />
-                </button>
-                <form>
-                    <label>
-                        <input type="radio" name="display-mode" value="all-members" v-model="filterMode" />
-                        Tất cả
-                    </label>
-                    <label>
-                        <input type="radio" name="display-mode" value="checked" v-model="filterMode" />
-                        Đã Điểm danh
-                    </label>
-                    <label>
-                        <input type="radio" name="display-mode" value="not-checked" v-model="filterMode" />
-                        Chưa Điểm danh
-                    </label>
-                </form>
-            </div>
-
-            <!-- List members join -->
-            <div class="wrapper-table">
-                <table class="table-list_member">
-                    <!-- Header table -->
-                    <tr>
-                        <td class="headerTable-list_member">STT</td>
-                        <td class="headerTable-list_member">Họ và tên</td>
-                        <td class="headerTable-list_member">Năm sinh</td>
-                        <td class="headerTable-list_member">Email</td>
-                        <td class="headerTable-list_member">Số điện thoại</td>
-                        <td class="headerTable-list_member">Trạng thái</td>
-                    </tr>
-
-                    <!-- Content table -->
-                    <tr v-for="(member, index) in paginatedMembers" :key="member.id">
-                        <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
-                        <td>
-                            <a
-                                :href="member.facebook || '#'"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="info-facebook"
+    
+            <!-- Content -->
+            <div class="content">
+                <!-- Header content -->
+                <div class="header-content">
+                    <h3>Danh sách nhân viên</h3>
+    
+                    <!-- List btn controll -->
+                    <div class="list-controll">
+                        <!-- Btn reload -->
+                        <button class="reload-content" @click="reloadMembers">
+                            <span class="tooltip-text">Tải lại</span>
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </button>
+    
+                        <!-- Btn sort name -->
+                        <button class="sort" @click="sortByName">
+                            <span class="tooltip-text">Sắp xếp</span>
+                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                        </button>
+    
+                        <!-- Export to Excel -->
+                        <button class="excel" @click="exportToExcel">
+                            <span class="tooltip-text">Xuất Excel</span>
+                            <i class="fa-solid fa-file-export"></i>
+                        </button>
+    
+                        <!-- Search box -->
+                        <div class="search">
+                            <input type="text" name="" id="" placeholder="Search..." v-model="searchQuery" />
+                            <button class="btn-search">
+                                <span class="tooltip-text">Search</span>
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Display mode -->
+                <div class="display-mode">
+                    <button class="add-member" @click="showModal = true">
+                        <span>
+                            <i class="fa-solid fa-plus"></i>
+                        </span>
+                        Thêm
+                        <router-view />
+                    </button>
+                    <form>
+                        <label>
+                            <input type="radio" name="display-mode" value="all-members" v-model="filterMode" />
+                            Tất cả
+                        </label>
+                        <label>
+                            <input type="radio" name="display-mode" value="checked" v-model="filterMode" />
+                            Đã Điểm danh
+                        </label>
+                        <label>
+                            <input type="radio" name="display-mode" value="not-checked" v-model="filterMode" />
+                            Chưa Điểm danh
+                        </label>
+                    </form>
+                </div>
+    
+                <!-- List members join -->
+                <div class="wrapper-table">
+                    <table class="table-list_member">
+                        <!-- Header table -->
+                        <tr>
+                            <td class="headerTable-list_member">STT</td>
+                            <td class="headerTable-list_member">Họ và tên</td>
+                            <td class="headerTable-list_member">Năm sinh</td>
+                            <td class="headerTable-list_member">Email</td>
+                            <td class="headerTable-list_member">Số điện thoại</td>
+                            <td class="headerTable-list_member">Trạng thái</td>
+                        </tr>
+    
+                        <!-- Content table -->
+                        <tr v-for="(member, index) in paginatedMembers" :key="member.id">
+                            <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
+                            <td>
+                                <a
+                                    :href="member.facebook || '#'"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="info-facebook"
+                                >
+                                    {{ member.fullName }}
+                                </a>
+                            </td>
+                            <td>{{ member.generation }}</td>
+                            <td :title="member.email">{{ member.email }}</td>
+                            <td>{{ member.phoneNumber }}</td>
+                            <td
+                                style="
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    gap: 10px;
+                                "
                             >
-                                {{ member.fullName }}
-                            </a>
-                        </td>
-                        <td>{{ member.generation }}</td>
-                        <td :title="member.email">{{ member.email }}</td>
-                        <td>{{ member.phoneNumber }}</td>
-                        <td
-                            style="
-                                display: grid;
-                                align-items: center;
-                                justify-content: center;
-                                grid-template-columns: 100px 100px;
-                                grid-template-rows: auto auto;
-                                gap: 10px;
-                            "
-                        >
-                            <button @click="handleSeeUser(member)">
-                                <i class="fa-solid fa-eye"></i>
-                                Xem
-                                <router-view />
-                            </button>
-                            <button @click="handleUpdateUser(member)">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                                Update
-                                <router-view />
-                            </button>
-                            <button @click="handleDeleteUser(member)">
-                                <i class="fa-solid fa-trash-can"></i>
-                                Xóa
-                                <router-view />
-                            </button>
-                            <!-- <button v-if="member.image && !member.isAccessImage" @click="handleApproveImage(member)">
-                                Duyệt ảnh
-                                <router-view />
-                            </button>
-                            <button v-if="member.image && !member.isAccessImage" @click="generateLink(member)">
-                                Tạo link
-                            </button> -->
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <!-- Controll page -->
-            <div class="controll-page">
-                <!-- prev page -->
-                <button @click="prevPage" :disabled="currentPage === 1">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </button>
-
-                <!-- choose page -->
-                <button @click="changePage(1)" :class="{ active: currentPage === 1 }">1</button>
-                <button v-if="currentPage > 3">...</button>
-                <button
-                    v-for="page in pagesToShow"
-                    :key="page"
-                    @click="changePage(page)"
-                    :class="{ active: currentPage === page }"
-                >
-                    {{ page }}
-                </button>
-                <button v-if="currentPage < totalPages - 2">...</button>
-                <button @click="changePage(totalPages)" :class="{ active: currentPage === totalPages }">
-                    {{ totalPages }}
-                </button>
-
-                <!-- next page -->
-                <button @click="nextPage" :disabled="currentPage === totalPages">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </button>
+                                <button @click="handleSeeUser(member)">
+                                    <span class="tooltip-text">Xem thông tin</span>
+                                    <i class="fa-solid fa-eye"></i>
+                                    <router-view />
+                                </button>
+                                <button @click="handleUpdateUser(member)">
+                                    <span class="tooltip-text">Cập nhật</span>
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    <router-view />
+                                </button>
+                                <button @click="handleDeleteUser(member)">
+                                    <span class="tooltip-text">Xóa nhân viên</span>
+                                    <i class="fa-solid fa-trash-can"></i>
+                                    <router-view />
+                                </button>
+                                <!-- <button v-if="member.image && !member.isAccessImage" @click="handleApproveImage(member)">
+                                    Duyệt ảnh
+                                    <router-view />
+                                </button> -->
+                                <button @click="generateLink(member)">
+                                    <span class="tooltip-text">Gửi link ảnh</span>
+                                    <i class="fa-solid fa-image"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+    
+                <!-- Controll page -->
+                <div class="controll-page">
+                    <!-- prev page -->
+                    <button @click="prevPage" :disabled="currentPage === 1">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+    
+                    <!-- choose page -->
+                    <button @click="changePage(1)" :class="{ active: currentPage === 1 }">1</button>
+                    <button v-if="currentPage > 3">...</button>
+                    <button
+                        v-for="page in pagesToShow"
+                        :key="page"
+                        @click="changePage(page)"
+                        :class="{ active: currentPage === page }"
+                    >
+                        {{ page }}
+                    </button>
+                    <button v-if="currentPage < totalPages - 2">...</button>
+                    <button @click="changePage(totalPages)" :class="{ active: currentPage === totalPages }">
+                        {{ totalPages }}
+                    </button>
+    
+                    <!-- next page -->
+                    <button @click="nextPage" :disabled="currentPage === totalPages">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -277,6 +311,7 @@ import ModalAddUser from '../modal/ModalAddUser.vue';
 import ModalSeeUser from '../modal/ModalSeeUser.vue';
 import ModalUpdateUser from '../modal/ModalUpdateUser.vue';
 // import ModalApproveImage from '../modal/ModalApproveImage.vue';
+import ModalLateUsers from '../modal/ModalLateUsers.vue';
 
 import { getToken } from '../api/authToken.js';
 
@@ -321,6 +356,9 @@ const showModalUpdateUser = ref(false);
 // modal ApproveImage
 // const showModalApproveImage = ref(false);
 
+// modal LaterUser
+const showModalLateUsers = ref(false);
+
 // type of data
 interface Member {
     id: string;
@@ -333,8 +371,33 @@ interface Member {
     isAccessImage: boolean;
     image: string;
     createdAt: Date | string;
+    checkinTime?: Date | string;
 }
 const members = ref<Member[]>([]);
+
+// new state variables for check-in statistics
+const checkedInCount = ref(0);
+const notCheckedInCount = ref(0);
+const lateCheckInCount = ref(0);
+
+const calculateCheckinStats = () => {
+    checkedInCount.value = members.value.filter(member => member.isCheckin).length;
+    notCheckedInCount.value = members.value.filter(member => !member.isCheckin).length;
+
+    // Cập nhật số nhân viên đến muộn dựa trên checkinTime
+    lateCheckInCount.value = members.value.filter(member => {
+        if (member.isCheckin && member.checkinTime) {
+            // Đảm bảo checkinTime là đối tượng Date nếu nó là chuỗi
+            const checkinDateTime = typeof member.checkinTime === 'string' ? new Date(member.checkinTime) : member.checkinTime;
+            return checkinDateTime.getHours() > 7 || (checkinDateTime.getHours() === 7 && checkinDateTime.getMinutes() > 0);
+        }
+        return false;
+    }).length;
+};
+
+const openLateUsersModal = () => {
+    showModalLateUsers.value = true;
+};
 
 // sort name A->Z
 const isSortedAsc = ref(true);
@@ -369,6 +432,8 @@ const fetchParticipants = async () => {
 
         // get total users
         totalUsers.value = response.data.data.total;
+
+        calculateCheckinStats(); 
     } catch (error: any) {
         if (error.response) {
             console.error('Lỗi từ phía server:', error.response);
@@ -575,15 +640,21 @@ const handleDeleteUser = async (member: Member) => {
         });
 
         if (response.status === 200) {
-            alert('Xóa nhân viên thành công!');
+            toast.success("Đã xóa nhân viên", {
+                autoClose: 3000,
+            })
             // Cập nhật lại danh sách nhân viên sau khi xóa
             members.value = members.value.filter((m) => m.id !== member.id);
         } else {
-            alert('Xóa nhân viên thất bại!');
+            toast.error("Có lỗi khi xóa nhân viên!", {
+                autoClose: 3000,
+            })
         }
     } catch (error) {
         console.error('Có lỗi xảy ra khi xóa nhân viên:', error);
-        alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
+        toast.error("Có lỗi xảy ra. Vui lòng thử lại sau.", {
+            autoClose: 3000,
+        })
     }
 };
 
@@ -602,26 +673,32 @@ const handleDeleteUser = async (member: Member) => {
 //     fetchParticipants();
 // };
 
-// const generateLink = async (member: Member) => {
-//     try {
-//         const response = await axios.get(`https://api.viphaui.com/api/v1/users/generate-link?q=${member.id}`, {
-//             headers: {
-//                 Authorization: `Bearer ${token}`,
-//                 'Content-Type': 'application/json',
-//             },
-//         });
+const generateLink = async (member: Member) => {
+    try {
+        const response = await axios.get(`https://api.viphaui.com/api/v1/users/generate-link?q=${member.id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
 
-//         const domain = window.location.origin;
+        const domain = window.location.origin;
 
-//         const linkToken = response.data.data.token;
-//         const link = `${domain}/UpdateImage?q=${linkToken}&id=${member.id}`;
+        const linkToken = response.data.data.token;
+        const link = `${domain}/update-image?q=${linkToken}&id=${member.id}`;
 
-//         // Copy link vào clipboard
-//         await navigator.clipboard.writeText(link);
-//     } catch (error) {
-//         console.error('Lỗi khi tạo link:', error);
-//     }
-// };
+        // Copy link vào clipboard
+        await navigator.clipboard.writeText(link);
+        toast.success("Đã copy link!", {
+            autoClose: 3000,
+        })
+    } catch (error) {
+        console.error('Lỗi khi tạo link:', error);
+        toast.error("Lỗi khi tạo link!", {
+            autoClose: 3000,
+        })
+    }
+};
 
 // Name's page
 onMounted(() => {
