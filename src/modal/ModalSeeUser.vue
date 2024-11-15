@@ -76,7 +76,7 @@ const closeModal = () => {
                 margin-top: 20px;
                 margin-bottom: 0;
                 font-size: 23px;
-                color: #ff984f;
+                color: #ffa564;
 
                 @media (max-width:767px) {
                     font-size: 18px;
@@ -91,9 +91,11 @@ const closeModal = () => {
                 cursor: pointer;
                 font-size: 30px;
                 background-color: transparent;
+                color: #f19d61a2;
+                transition: all 0.1s ease;
 
                 &:hover {
-                    color: #ff984f;
+                    color: #ffa564;
                 }
 
                 @media (max-width:767px) {
@@ -113,7 +115,7 @@ const closeModal = () => {
                 justify-content: center;
                 padding: 10px 0;
                 border-radius: 10px;
-                border: 2px solid #ff984f;
+                border: 2px solid #ffa564;
 
                 img {
                     width: 100%;
@@ -133,17 +135,18 @@ const closeModal = () => {
                     margin-top: 20px;
 
                     strong {
-                        color: #ff984f;
+                        color: #ffa564;
                         margin-left: 5px;
                     }
                     span, a {
-                        border-bottom: 1px solid #ff984f;
                         padding: 5px;
+                        color: #333;
                         padding-top: 0;
                         text-decoration: none;
+                        border-bottom: 1px solid #ffa564;
                     }
                     a {
-                        color: #222;
+                        color: #333;
                         &:hover {
                             color: rgb(0, 98, 255);
                         }

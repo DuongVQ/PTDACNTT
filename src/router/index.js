@@ -7,6 +7,8 @@ import Dashboard from '@/views/Dashboard.vue';
 import Login from '@/views/Login.vue';
 import UpdateImage from '@/views/UpdateImage.vue';
 import SignUp from '@/views/SignUp.vue';
+import OnlyQr from '@/views/OnlyQr.vue';
+import OnlyEmail from '@/views/OnlyEmail.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +52,16 @@ const router = createRouter({
             name: 'signup',
             component: SignUp,
         },
+        {
+            path: '/employee-qr',
+            name: 'employee-qr',
+            component: OnlyQr,
+        },
+        {
+            path: '/employee-email',
+            name: 'employee-email',
+            component: OnlyEmail,
+        }
     ],
 });
 

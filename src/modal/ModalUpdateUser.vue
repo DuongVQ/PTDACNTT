@@ -65,7 +65,7 @@
 
                     <!-- Btn submit -->
                     <button type="submit" class="btn-primary">
-                        Lưu
+                        Lưu thông tin
                         <div class="star-1">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -309,10 +309,7 @@ const handleSubmit = async () => {
                 font-size: 23px;
                 margin: 0;
                 margin-top: 22px;
-                background: linear-gradient(45deg, rgb(255, 177, 89), rgb(255, 155, 67));
-                background-clip: text;
-                -webkit-background-clip: text;
-                color: transparent;
+                color: #ffac71;
 
                 @media (max-width: 767px) {
                     font-size: 18px;
@@ -325,8 +322,11 @@ const handleSubmit = async () => {
                 right: 0px;
                 font-size: 35px;
                 cursor: pointer;
+                color: #f19d61a2;
+                transition: all 0.1s ease;
+
                 &:hover {
-                    color: #ff6f56;
+                    color: #ffa564;
                 }
                 @media (max-width: 767px) {
                     top: 15px;
@@ -357,17 +357,14 @@ const handleSubmit = async () => {
                 label {
                     font-size: 18px;
                     font-weight: 600;
-                    background: linear-gradient(45deg, rgb(255, 177, 89), rgb(255, 155, 67));
-                    background-clip: text;
-                    -webkit-background-clip: text;
-                    color: transparent;
+                    color: #ffae74;
                 }
                 input,
                 select {
                     padding: 5px 10px;
                     border: none;
                     outline: none;
-                    border-bottom: 1px solid #ff9a56;
+                    border-bottom: 1px solid #ffa564;
                     font-size: 18px;
                     color: #444;
                 }
@@ -375,21 +372,23 @@ const handleSubmit = async () => {
 
             // Btn
             /* From Uiverse.io by Peary74 */
+            // Css btn
+            /* From Uiverse.io by MuhammadHasann */
             button {
-                background: linear-gradient(45deg, #f9d255, rgb(255, 162, 0), rgb(255, 132, 43));
-                border: 3px solid #f68f46;
-                box-shadow: 6px 0px 0px #f69000;
                 position: relative;
-                padding: 8px 35px;
-                margin-top: 20px;
+                padding: 10px 35px;
+                margin: 10px auto 30px;
+                background: #ffa564;
                 font-size: 18px;
                 font-weight: 500;
-                color: white;
+                font-family: 'Roboto';
+                color: #fffef0;
                 border-radius: 8px;
-                box-shadow: 0 0 0 #fec1958c;
+                border: 3px solid #ffa564;
+                box-shadow: 0 0 0 #ffa5648c;
                 transition: all 0.3s ease-in-out;
-                margin-bottom: 30px;
                 cursor: pointer;
+                width: 100%;
             }
 
             .star-1 {
@@ -398,7 +397,7 @@ const handleSubmit = async () => {
                 left: 20%;
                 width: 25px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
             }
@@ -409,7 +408,7 @@ const handleSubmit = async () => {
                 left: 45%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -420,7 +419,7 @@ const handleSubmit = async () => {
                 left: 40%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -431,7 +430,7 @@ const handleSubmit = async () => {
                 left: 40%;
                 width: 8px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -442,7 +441,7 @@ const handleSubmit = async () => {
                 left: 45%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 0.6s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -453,15 +452,15 @@ const handleSubmit = async () => {
                 left: 50%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 0.8s ease;
             }
 
             button:hover {
                 background: transparent;
-                color: #fd9e18;
-                box-shadow: 0 0 50px #fd9e18;
+                color: #ffa564;
+                box-shadow: 0 0 25px #ffa5648c;
             }
 
             button:hover .star-1 {
@@ -470,7 +469,7 @@ const handleSubmit = async () => {
                 left: -30%;
                 width: 25px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
@@ -480,7 +479,7 @@ const handleSubmit = async () => {
                 left: 10%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
@@ -490,7 +489,7 @@ const handleSubmit = async () => {
                 left: 25%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
@@ -500,7 +499,7 @@ const handleSubmit = async () => {
                 left: 80%;
                 width: 8px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
@@ -510,7 +509,7 @@ const handleSubmit = async () => {
                 left: 115%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
@@ -520,12 +519,12 @@ const handleSubmit = async () => {
                 left: 60%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
             .fil0 {
-                fill: #fd7718;
+                fill: #ffc987;
             }
         }
 

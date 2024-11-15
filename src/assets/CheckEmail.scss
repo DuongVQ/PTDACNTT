@@ -200,7 +200,7 @@
 
         .check-in-form {
             width: 620px;
-            background-color: #fff;
+            background-color: rgb(255, 251, 247);
             border: 2px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.221);
             color: #fff;
@@ -215,10 +215,7 @@
                 font-size: 32px;
                 text-align: center;
                 margin-bottom: 30px;
-                background: linear-gradient(45deg, #f9d255, rgb(255, 162, 0), rgb(255, 132, 43));
-                background-clip: text;
-                -webkit-background-clip: text;
-                color: transparent;
+                color: #ffa564;
     
                 @media (max-width: 767px) {
                     font-size: 27px;
@@ -237,10 +234,7 @@
                         font-size: 18px;
                         display: block;
                         margin-bottom: 10px;
-                        background: linear-gradient(45deg, #f9d255, rgb(255, 162, 0), rgb(255, 132, 43));
-                        background-clip: text;
-                        -webkit-background-clip: text;
-                        color: transparent;
+                        color: #ffa564;
                     }
     
                     input {
@@ -248,7 +242,8 @@
                         height: 100%;
                         border: none;
                         outline: none;
-                        border: 3px solid #f68f46;
+                        border: 3px solid #ffa564;
+                        background-color: transparent;
                         border-radius: 8px;
                         font-size: 18px;
                         color: #333;
@@ -291,10 +286,7 @@
 
         h1 {
             font-size: 32px;
-            background: linear-gradient(45deg, #f9d255, rgb(255, 162, 0), rgb(255, 132, 43));
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+            color: #ffa564;
         }
 
         img {
@@ -307,11 +299,9 @@
             font-size: 18px;
             margin: 0 20px 40px;
             text-align: center;
+
             .participant {
-                background: linear-gradient(45deg, #f9d255, rgb(255, 162, 0), rgb(255, 132, 43));
-                background-clip: text;
-                -webkit-background-clip: text;
-                color: transparent;
+                color: #ffa564;
             }
         }
     }
@@ -439,15 +429,15 @@
 /* From Uiverse.io by Peary74 */
 button {
     position: relative;
-    padding: 10px 35px;
-    margin-top: 20px;
+    padding: 0px 35px;
+    margin: 10px auto;
+    background: #ffa564;
     font-size: 18px;
-    font-weight: 500;
-    font-family: 'Roboto';
+    font-weight: 600;
+    font-family: 'Montserrat';
     color: #fffef0;
     border-radius: 8px;
-    background: linear-gradient(45deg, #f9d255, rgb(255, 162, 0), rgb(255, 132, 43));
-    border: 3px solid #f68f46;
+    border: 3px solid #ffa564;
     box-shadow: 0 0 0 #ffa5648c;
     transition: all 0.3s ease-in-out;
     cursor: pointer;

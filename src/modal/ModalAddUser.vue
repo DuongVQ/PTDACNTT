@@ -16,12 +16,7 @@
                     <div class="icon_form-group">
                         <i class="fa-solid fa-calendar-days"></i>
                     </div>
-                    <input
-                        v-model="newUser.generation"
-                        type="number"
-                        id="generation"
-                        placeholder="Năm sinh..."
-                    />
+                    <input v-model="newUser.generation" type="number" id="generation" placeholder="Năm sinh..." />
                 </div>
                 <div class="form-group">
                     <div class="icon_form-group">
@@ -38,12 +33,7 @@
                     <div class="icon_form-group">
                         <i class="fa-solid fa-phone"></i>
                     </div>
-                    <input
-                        v-model="newUser.phoneNumber"
-                        type="text"
-                        id="phone"
-                        placeholder="Nhập số điện thoại..."
-                    />
+                    <input v-model="newUser.phoneNumber" type="text" id="phone" placeholder="Nhập số điện thoại..." />
                 </div>
                 <div class="form-group">
                     <div class="icon_form-group">
@@ -213,6 +203,8 @@
 
 <script lang="ts" setup>
 import { ref, defineEmits, defineProps } from 'vue';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import axios from 'axios';
 
 const newUser = ref({
@@ -280,18 +272,27 @@ const handleSubmit = async () => {
         if (error.response) {
             console.error('Lỗi từ phía server:', error.response.status);
             console.error('Chi tiết lỗi:', error.response.data);
-            if (error.response.data) {
-            }
+            toast.error(`Đã có lỗi xảy ra: ${error.response.status}`, {
+                autoClose: 3000,
+            })
         } else if (error.request) {
             console.error('Không nhận được phản hồi từ server:', error.request);
+            toast.error(`Đã có lỗi xảy ra: ${error.request}`, {
+                autoClose: 3000,
+            })
         } else {
             console.error('Lỗi trong quá trình xử lý yêu cầu:', error.message);
+            toast.error(`Đã có lỗi xảy ra: ${error.message}`, {
+                autoClose: 3000,
+            })
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -307,7 +308,7 @@ const handleSubmit = async () => {
     z-index: 11;
 
     .modal-content {
-        background: white;
+        background: rgb(255, 251, 247);
         padding: 0 40px;
         border-radius: 8px;
         width: 400px;
@@ -322,13 +323,12 @@ const handleSubmit = async () => {
             margin-bottom: 30px;
 
             h3 {
-                font-size: 28px;
+                font-size: 26px;
+                font-weight: 600;
+                font-family: 'Montserrat';
                 margin: 0;
                 margin-top: 22px;
-                background: linear-gradient(45deg, rgb(255, 177, 89), rgb(255, 155, 67));
-                background-clip: text;
-                -webkit-background-clip: text;
-                color: transparent;
+                color: #ffa564;
             }
 
             span {
@@ -337,8 +337,11 @@ const handleSubmit = async () => {
                 right: -10px;
                 font-size: 32px;
                 cursor: pointer;
+                color: #f19d61a2;
+                transition: all 0.1s ease;
+
                 &:hover {
-                    color: #f19e61;
+                    color: #ffa564;
                 }
             }
         }
@@ -348,29 +351,31 @@ const handleSubmit = async () => {
             display: flex;
             align-items: center;
             margin: 15px 0;
-            border: 2px solid #f19e61;
+            border: 2px solid #ffa564;
             color: #444;
             border-radius: 5px;
             overflow: hidden;
 
             .icon_form-group {
-                width: 40px;
+                width: 50px;
                 height: 40px;
+                font-size: 15px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 15px;
-                border-right: 2px solid #70707015;
-                color: #f19e61;
+                border-right: 2px solid #fed0afad;
+                color: #ffa564;
             }
 
             input {
-                font-size: 16px;
-                padding: 15px 15px;
+                flex: 1;
                 border: none;
                 outline: none;
-                flex: 1;
-
+                font-size: 16px;
+                padding: 15px 15px;
+                background-color: transparent;
+                font-family: "Montserrat";
+                font-weight: 500;
                 &::placeholder {
                     color: #a1babf;
                 }
@@ -391,21 +396,23 @@ const handleSubmit = async () => {
             width: 100%;
             text-align: center;
 
+            // Css btn
+            /* From Uiverse.io by MuhammadHasann */
             button {
-                background: linear-gradient(45deg, #f9d255, rgb(255, 162, 0), rgb(255, 132, 43));
-                border: 3px solid #f68f46;
-                box-shadow: 6px 0px 0px #f69000;
                 position: relative;
-                padding: 8px 35px;
-                margin-top: 20px;
+                padding: 10px 35px;
+                margin: 10px auto 30px;
+                background: #ffa564;
                 font-size: 18px;
-                font-weight: 500;
-                color: white;
+                font-weight: 600;
+                font-family: 'Montserrat';
+                color: #fffef0;
                 border-radius: 8px;
-                box-shadow: 0 0 0 #fec1958c;
+                border: 3px solid #ffa564;
+                box-shadow: 0 0 0 #ffa5648c;
                 transition: all 0.3s ease-in-out;
-                margin-bottom: 30px;
                 cursor: pointer;
+                width: 100%;
             }
 
             .star-1 {
@@ -414,7 +421,7 @@ const handleSubmit = async () => {
                 left: 20%;
                 width: 25px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
             }
@@ -425,7 +432,7 @@ const handleSubmit = async () => {
                 left: 45%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -436,7 +443,7 @@ const handleSubmit = async () => {
                 left: 40%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -447,7 +454,7 @@ const handleSubmit = async () => {
                 left: 40%;
                 width: 8px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -458,7 +465,7 @@ const handleSubmit = async () => {
                 left: 45%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 0.6s cubic-bezier(0, 0.4, 0, 1.01);
             }
@@ -469,15 +476,15 @@ const handleSubmit = async () => {
                 left: 50%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 0 #fd7718);
+                filter: drop-shadow(0 0 0 #fffdef);
                 z-index: -5;
                 transition: all 0.8s ease;
             }
 
             button:hover {
                 background: transparent;
-                color: #fd9e18;
-                box-shadow: 0 0 50px #fd9e18;
+                color: #ffa564;
+                box-shadow: 0 0 25px #ffa5648c;
             }
 
             button:hover .star-1 {
@@ -486,7 +493,7 @@ const handleSubmit = async () => {
                 left: -30%;
                 width: 25px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
@@ -496,7 +503,7 @@ const handleSubmit = async () => {
                 left: 10%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
@@ -506,7 +513,7 @@ const handleSubmit = async () => {
                 left: 25%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
@@ -516,7 +523,7 @@ const handleSubmit = async () => {
                 left: 80%;
                 width: 8px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
@@ -526,7 +533,7 @@ const handleSubmit = async () => {
                 left: 115%;
                 width: 15px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
@@ -536,12 +543,12 @@ const handleSubmit = async () => {
                 left: 60%;
                 width: 5px;
                 height: auto;
-                filter: drop-shadow(0 0 10px #fd7718);
+                filter: drop-shadow(0 0 10px #fffdef);
                 z-index: 2;
             }
 
             .fil0 {
-                fill: #fd7718;
+                fill: #ffc987;
             }
         }
     }

@@ -52,30 +52,28 @@
         <!-- Navbar -->
         <div class="nav-bar">
             <div class="avata-admin">
-                <img src="../images/simple-user-default-icon-free-png.webp" alt="">
+                <img src="../images/simple-user-default-icon-free-png.webp" alt="" />
                 <div class="list-navbarMenu">
                     <div class="item-navbarMenu">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        Chức năng 1
+                        <RouterLink tag="a" to="/employee-qr" target="_blank">
+                            <i class="fa-solid fa-qrcode"></i>
+                            Quét QR
+                        </RouterLink>
                     </div>
                     <div class="item-navbarMenu">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        Chức năng 2
+                        <RouterLink tag="a" to="/employee-email" target="_blank">
+                            <i class="fa-solid fa-envelope"></i>
+                            Nhập email
+                        </RouterLink>
                     </div>
                     <div class="item-navbarMenu">
-                        <RouterLink
-                            to="/signup"
-                            
-                        >
+                        <RouterLink tag="a" to="/signup" target="_blank">
                             <i class="fa-solid fa-user-plus"></i>
                             Link đăng ký
                         </RouterLink>
                     </div>
                     <div class="item-navbarMenu">
-                        <RouterLink
-                            to="/provide-qr"
-                            
-                        >
+                        <RouterLink to="/provide-qr">
                             <i class="fa-solid fa-file-arrow-down"></i>
                             Cấp mã QR
                         </RouterLink>
@@ -92,39 +90,30 @@
 
         <div class="main">
             <div class="detail">
-                <div class="item-detail"
-                    style="border-left: 4px solid rgb(34, 188, 34);"
-                >
-                    Số lượng nhân viên đã điểm danh <br>
+                <div class="item-detail" style="border-left: 4px solid rgb(34, 188, 34)">
+                    Số lượng nhân viên đã điểm danh <br />
+                    <span> {{ checkedInCount }} / {{ members.length }} </span>
+                </div>
+                <div class="item-detail" style="border-left: 4px solid rgb(236, 32, 32)">
+                    Số lượng nhân viên chưa điểm danh <br />
                     <span>
-                        {{ checkedInCount }} / {{ members.length }}
+                        {{ notCheckedInCount }} / {{ members.length }}
                     </span>
                 </div>
-                <div class="item-detail"
-                    style="border-left: 4px solid rgb(236, 32, 32);"
-                >
-                    Số lượng nhân viên chưa điểm danh <br> 
-                    <span>
-                        {{ notCheckedInCount }}
-                    </span>
-                </div>
-                <div class="item-detail"
-                    style="border-left: 4px solid #666;"
-                    @click="openLateUsersModal"
-                >
-                    Số lượng nhân viên đến muộn <br>
+                <div class="item-detail" style="border-left: 4px solid #666" @click="openLateUsersModal">
+                    Số lượng nhân viên đến muộn <br />
                     <span>
                         {{ lateCheckInCount }}
                     </span>
                 </div>
             </div>
-    
+
             <!-- Content -->
             <div class="content">
                 <!-- Header content -->
                 <div class="header-content">
                     <h3>Danh sách nhân viên</h3>
-    
+
                     <!-- List btn controll -->
                     <div class="list-controll">
                         <!-- Btn reload -->
@@ -132,19 +121,19 @@
                             <span class="tooltip-text">Tải lại</span>
                             <i class="fa-solid fa-rotate-right"></i>
                         </button>
-    
+
                         <!-- Btn sort name -->
                         <button class="sort" @click="sortByName">
                             <span class="tooltip-text">Sắp xếp</span>
                             <i class="fa-solid fa-arrow-down-a-z"></i>
                         </button>
-    
+
                         <!-- Export to Excel -->
                         <button class="excel" @click="exportToExcel">
                             <span class="tooltip-text">Xuất Excel</span>
                             <i class="fa-solid fa-file-export"></i>
                         </button>
-    
+
                         <!-- Search box -->
                         <div class="search">
                             <input type="text" name="" id="" placeholder="Search..." v-model="searchQuery" />
@@ -155,7 +144,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <!-- Display mode -->
                 <div class="display-mode">
                     <button class="add-member" @click="showModal = true">
@@ -180,7 +169,7 @@
                         </label>
                     </form>
                 </div>
-    
+
                 <!-- List members join -->
                 <div class="wrapper-table">
                     <table class="table-list_member">
@@ -193,7 +182,7 @@
                             <td class="headerTable-list_member">Số điện thoại</td>
                             <td class="headerTable-list_member">Trạng thái</td>
                         </tr>
-    
+
                         <!-- Content table -->
                         <tr v-for="(member, index) in paginatedMembers" :key="member.id">
                             <td>{{ (currentPage - 1) * itemsPerPage + index + 1 }}</td>
@@ -210,14 +199,7 @@
                             <td>{{ member.generation }}</td>
                             <td :title="member.email">{{ member.email }}</td>
                             <td>{{ member.phoneNumber }}</td>
-                            <td
-                                style="
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    gap: 10px;
-                                "
-                            >
+                            <td style="display: flex; align-items: center; justify-content: center">
                                 <button @click="handleSeeUser(member)">
                                     <span class="tooltip-text">Xem thông tin</span>
                                     <i class="fa-solid fa-eye"></i>
@@ -245,30 +227,25 @@
                         </tr>
                     </table>
                 </div>
-    
+
                 <!-- Controll page -->
                 <div class="controll-page">
                     <!-- prev page -->
                     <button @click="prevPage" :disabled="currentPage === 1">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-    
+
                     <!-- choose page -->
-                    <button @click="changePage(1)" :class="{ active: currentPage === 1 }">1</button>
-                    <button v-if="currentPage > 3">...</button>
                     <button
                         v-for="page in pagesToShow"
                         :key="page"
                         @click="changePage(page)"
+                        :disabled="page === '...'"
                         :class="{ active: currentPage === page }"
                     >
                         {{ page }}
                     </button>
-                    <button v-if="currentPage < totalPages - 2">...</button>
-                    <button @click="changePage(totalPages)" :class="{ active: currentPage === totalPages }">
-                        {{ totalPages }}
-                    </button>
-    
+
                     <!-- next page -->
                     <button @click="nextPage" :disabled="currentPage === totalPages">
                         <i class="fa-solid fa-chevron-right"></i>
@@ -381,15 +358,18 @@ const notCheckedInCount = ref(0);
 const lateCheckInCount = ref(0);
 
 const calculateCheckinStats = () => {
-    checkedInCount.value = members.value.filter(member => member.isCheckin).length;
-    notCheckedInCount.value = members.value.filter(member => !member.isCheckin).length;
+    checkedInCount.value = members.value.filter((member) => member.isCheckin).length;
+    notCheckedInCount.value = members.value.filter((member) => !member.isCheckin).length;
 
     // Cập nhật số nhân viên đến muộn dựa trên checkinTime
-    lateCheckInCount.value = members.value.filter(member => {
+    lateCheckInCount.value = members.value.filter((member) => {
         if (member.isCheckin && member.checkinTime) {
             // Đảm bảo checkinTime là đối tượng Date nếu nó là chuỗi
-            const checkinDateTime = typeof member.checkinTime === 'string' ? new Date(member.checkinTime) : member.checkinTime;
-            return checkinDateTime.getHours() > 7 || (checkinDateTime.getHours() === 7 && checkinDateTime.getMinutes() > 0);
+            const checkinDateTime =
+                typeof member.checkinTime === 'string' ? new Date(member.checkinTime) : member.checkinTime;
+            return (
+                checkinDateTime.getHours() > 7 || (checkinDateTime.getHours() === 7 && checkinDateTime.getMinutes() > 0)
+            );
         }
         return false;
     }).length;
@@ -433,7 +413,7 @@ const fetchParticipants = async () => {
         // get total users
         totalUsers.value = response.data.data.total;
 
-        calculateCheckinStats(); 
+        calculateCheckinStats();
     } catch (error: any) {
         if (error.response) {
             console.error('Lỗi từ phía server:', error.response);
@@ -543,9 +523,9 @@ const filterByCheckStatus = computed(() => {
 
 // Search with key word
 const filteredMembers = computed(() => {
-    return filterByCheckStatus.value.filter((member) =>
-        member.fullName.toLowerCase().includes(searchQuery.value.toLowerCase()),
-    );
+    return filterByCheckStatus.value.filter((member) => {
+        return member.fullName?.toLowerCase().includes(searchQuery.value.toLowerCase());
+    });
 });
 
 // Calculate total number of pages
@@ -554,17 +534,40 @@ const totalPages = computed(() => {
 });
 
 const pagesToShow = computed(() => {
+    const totalPagesArr = [];
+
+    // Kiểm tra xem tổng số trang là nhỏ hơn hoặc bằng 5
     if (totalPages.value <= 5) {
-        return Array.from({ length: totalPages.value }, (_, i) => i + 1);
+        for (let i = 1; i <= totalPages.value; i++) {
+            totalPagesArr.push(i);
+        }
     } else {
+        // Nếu số trang lớn hơn 5, ta tính toán các trang hiển thị dựa vào vị trí của trang hiện tại
         if (currentPage.value <= 3) {
-            return [2, 3, 4];
+            totalPagesArr.push(1, 2, 3, 4, '...', totalPages.value);
         } else if (currentPage.value >= totalPages.value - 2) {
-            return [totalPages.value - 3, totalPages.value - 2, totalPages.value - 1];
+            totalPagesArr.push(
+                1,
+                '...',
+                totalPages.value - 3,
+                totalPages.value - 2,
+                totalPages.value - 1,
+                totalPages.value,
+            );
         } else {
-            return [currentPage.value - 1, currentPage.value, currentPage.value + 1];
+            totalPagesArr.push(
+                1,
+                '...',
+                currentPage.value - 1,
+                currentPage.value,
+                currentPage.value + 1,
+                '...',
+                totalPages.value,
+            );
         }
     }
+
+    return totalPagesArr;
 });
 
 // Member number
@@ -640,21 +643,21 @@ const handleDeleteUser = async (member: Member) => {
         });
 
         if (response.status === 200) {
-            toast.success("Đã xóa nhân viên", {
+            toast.success('Đã xóa nhân viên', {
                 autoClose: 3000,
-            })
+            });
             // Cập nhật lại danh sách nhân viên sau khi xóa
             members.value = members.value.filter((m) => m.id !== member.id);
         } else {
-            toast.error("Có lỗi khi xóa nhân viên!", {
+            toast.error('Có lỗi khi xóa nhân viên!', {
                 autoClose: 3000,
-            })
+            });
         }
     } catch (error) {
         console.error('Có lỗi xảy ra khi xóa nhân viên:', error);
-        toast.error("Có lỗi xảy ra. Vui lòng thử lại sau.", {
+        toast.error('Có lỗi xảy ra. Vui lòng thử lại sau.', {
             autoClose: 3000,
-        })
+        });
     }
 };
 
@@ -689,14 +692,14 @@ const generateLink = async (member: Member) => {
 
         // Copy link vào clipboard
         await navigator.clipboard.writeText(link);
-        toast.success("Đã copy link!", {
+        toast.success('Đã copy link!', {
             autoClose: 3000,
-        })
+        });
     } catch (error) {
         console.error('Lỗi khi tạo link:', error);
-        toast.error("Lỗi khi tạo link!", {
+        toast.error('Lỗi khi tạo link!', {
             autoClose: 3000,
-        })
+        });
     }
 };
 

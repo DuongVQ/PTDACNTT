@@ -55,16 +55,22 @@
                 <img src="../images/simple-user-default-icon-free-png.webp" alt="">
                 <div class="list-navbarMenu">
                     <div class="item-navbarMenu">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        Chức năng 1
+                        <RouterLink tag="a" to="/employee-qr" target="_blank">
+                            <i class="fa-solid fa-qrcode"></i>
+                            Quét QR
+                        </RouterLink>
                     </div>
                     <div class="item-navbarMenu">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        Chức năng 2
+                        <RouterLink tag="a" to="/employee-email" target="_blank">
+                            <i class="fa-solid fa-envelope"></i>
+                            Nhập email
+                        </RouterLink>
                     </div>
                     <div class="item-navbarMenu">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        Chức năng 3
+                        <RouterLink tag="a" to="/signup" target="_blank">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Link đăng ký
+                        </RouterLink>
                     </div>
                     <div class="item-navbarMenu">
                         <RouterLink
@@ -257,13 +263,15 @@
         <Modal @close="handleCheck" :modalActive="modalActive">
             <div class="modal-content">
                 <h1>Thông báo điểm danh!</h1>
-                <!-- <img src="../images/checksecondary61.gif" alt=""> -->
-                <img src="../images/Animation - 1729764222906.gif" alt="">
-                <p>
-                    Cảm ơn bạn
-                    <span class="participant"> {{ fullName }} </span> <br>
-                    Đã đến đúng giờ đi làm!
-                </p>
+                <p v-if="errorMessage" style="color: red; margin-top: 20px;">{{ errorMessage }}</p>
+                <div v-else style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <img src="../images/checkok.gif" alt="" style="width: 100px; height: 100px;">
+                    <p>
+                        Cảm ơn bạn
+                        <span class="participant"> {{ fullName }} </span> <br>
+                        Đã đến đúng giờ đi làm!
+                    </p>
+                </div>
             </div>
         </Modal>
     </div>
@@ -280,7 +288,6 @@ import { getToken } from '../api/authToken.js';
 
 const inputValue = ref('');
 const fullName = ref<string | null>(null);
-const course = ref<string | null>(null);
 
 const route = useRoute();
 const router = useRouter();
@@ -313,9 +320,12 @@ onBeforeUnmount(() => {
 
 // set token
 let token = getToken();
+// error message
+const errorMessage = ref('');
 
 // Handle submit check (main)
 const checkIn = async () => {
+    errorMessage.value = '';
     try {
         const response = await axios.patch(
             `https://api.viphaui.com/api/v1/users/checkin?q=${inputValue.value}`,
@@ -328,15 +338,16 @@ const checkIn = async () => {
             },
         );
         fullName.value = response.data.data.fullName;
-        course.value = response.data.data.generation;
-        if (fullName.value === null) {
-            return;
+        if (!fullName.value) {
+            errorMessage.value = "Bạn đã nhập sai! Vui lòng nhập lại.";
         }
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error('Axios error:', error.response?.data);
+            errorMessage.value = "Bạn đã nhập sai! Vui lòng nhập lại.";
         } else {
             console.error('Unexpected error:', error);
+            errorMessage.value = "Bạn đã nhập sai! Vui lòng nhập lại.";
         }
     }
 };

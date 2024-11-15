@@ -57,7 +57,7 @@ export default {
     top: 0;
     left: 0;
     z-index: 10;
-    background-color: #6d6d6d1c;
+    background-color: rgba(0, 0, 0, 0.5);
     .modal-inner {
         position: relative;
         max-width: 500px;
@@ -73,10 +73,10 @@ export default {
             top: 20px;
             right: 20px;
             font-size: 35px;
-            color: rgb(68, 115, 255);
+            color: #ffa564a2;
             cursor: pointer;
             &:hover {
-                color: rgb(40, 20, 220);
+                color: #ffa564;
             }
 
             @media (max-width: 767px) {
@@ -88,8 +88,8 @@ export default {
 .slot {
     width: 100%;
     height: 0.5px;
-    background-color: #4096ff;
-    margin: 40px auto 20px;
+    background-color: #ffa564;
+    margin: 20px auto;
 }
 button {
     width: 100px;
@@ -99,10 +99,10 @@ button {
     color: white;
     font-size: 20px;
     font-weight: 500;
-    padding: 12px 35px;
+    padding: 10px 35px;
     border: none;
     border-radius: 4px;
-    background: rgb(40, 126, 255);
+    background: #ffa564;
     cursor: pointer;
     margin-right: 20px;
     margin-left: auto;
